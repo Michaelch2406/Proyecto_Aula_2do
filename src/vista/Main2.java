@@ -35,6 +35,14 @@ public class Main2 {
 
         do {
             lc.limpiarPantalla();
+//            System.out.println("░██████╗░█████╗░██╗░░░░░██╗░█████╗░██╗████████╗██╗░░░██╗██████╗░███████╗░██████╗");
+//            System.out.println(" ██╔════╝██╔══██╗██║░░░░░██║██╔══██╗██║╚══██╔══╝██║░░░██║██╔══██╗██╔════╝██╔════╝");
+//            System.out.println("╚█████╗░██║░░██║██║░░░░░██║██║░░╚═╝██║░░░██║░░░██║░░░██║██║░░██║█████╗░░╚█████╗░");
+//            System.out.println("░╚═══██╗██║░░██║██║░░░░░██║██║░░██╗██║░░░██║░░░██║░░░██║██║░░██║██╔══╝░░░╚═══██╗");
+//            System.out.println("██████╔╝╚█████╔╝███████╗██║╚█████╔╝██║░░░██║░░░╚██████╔╝██████╔╝███████╗██████╔╝");
+//            System.out.println("╚═════╝░░╚════╝░╚══════╝╚═╝░╚════╝░╚═╝░░░╚═╝░░░░╚═════╝░╚═════╝░╚══════╝╚═════╝░");
+            //System.out.println("ʕ•́ᴥ•̀ʔっ");
+
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
                     + "1. Iniciar Sesión\n"
@@ -51,11 +59,12 @@ public class Main2 {
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el sistema!");
+                    
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            
+
         } while (i == 1);
     }
 
@@ -77,7 +86,7 @@ public class Main2 {
             es.nextLine(); // Consumir el salto de línea residual
             EstudianteControlador estC = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
-            TurnoControlador tc=new TurnoControlador();
+            TurnoControlador tc = new TurnoControlador();
             Solicitud s = new Solicitud();
             switch (op1) {
                 case 1 ->
@@ -100,11 +109,11 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            
+
             System.out.println(""); // Línea en blanco para separación
             System.out.println("Presione Enter para continuar...");
             es.nextLine(); // Pausa esperando que el usuario presione Enter
-            
+
         } while (i == 1);
     }
 

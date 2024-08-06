@@ -165,19 +165,33 @@ public class LogeoControlador {
         String carrera11 = "TECNOLOGIA SUPERIOR EN BIOTECNOLOGIA";
         String carrera12 = "TECNOLOGIA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
         // Selección de carrera
-        System.out.println("Seleccione su carrera: ");
-        System.out.println("1. " + carrera1);
+        
+        System.out.println("Seleccione su carrera:");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        System.out.println("|1. " + carrera1);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("2. " + carrera2);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("3. " + carrera3);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("4. " + carrera4);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("5. " + carrera5);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("6. " + carrera6);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("7. " + carrera7);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("8. " + carrera8);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("9. " + carrera9);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("10. " + carrera10);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("11. " + carrera11);
+        System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("12. " + carrera12);
+        System.out.println("-----------------------------------------------------------------------------------------------");
 
         int carreraOpcion = es.nextInt();
         es.nextLine(); // Consumir el salto de línea residual
@@ -220,11 +234,17 @@ public class LogeoControlador {
         int nivel;
         do {
             System.out.println("Ingrese su nivel de carrera: ");
-            System.out.println("1. Primero");
-            System.out.println("2. Segundo");
-            System.out.println("3. Tercero");
-            System.out.println("4. Cuarto");
-            System.out.println("5. Quinto");
+            System.out.println("*--------------*");
+            System.out.println("|1. Primero    |");
+            System.out.println("---------------|");
+            System.out.println("|2. Segundo    |");
+            System.out.println("---------------|");
+            System.out.println("|3. Tercero    |");
+            System.out.println("---------------|");
+            System.out.println("|4. Cuarto     |");
+            System.out.println("---------------|");
+            System.out.println("|5. Quinto     |");
+            System.out.println("*--------------*");
 
             nivel = es.nextInt();
             es.nextLine(); // Consumir el salto de línea residual

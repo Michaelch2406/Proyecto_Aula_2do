@@ -8,7 +8,7 @@ package modelo;
  *
  * @author LENOVO
  */
-public class Turno {
+public class Turno extends Solicitud{
     private int idTurno;
     private String codigo;
     private String fecha;

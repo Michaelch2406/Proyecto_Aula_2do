@@ -95,6 +95,38 @@ public class TurnoControlador {
         return null;
 
     }
+    
+    public ArrayList<Turno> consultarPrueba() {
+        ArrayList<Turno> listaTurno = new ArrayList<>();
+        try {
+
+            String consultaSQL = "select * FROM solicitudes join turnos on solicitudes.Sol_Id=turnos.Sol_Id ;";
+            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
+
+            resultado = ejecutar.executeQuery();
+
+            while (resultado.next()) {
+
+                Turno t = new Turno();
+                Solicitud s=new Solicitud();
+                t.setCodigo(resultado.getString("Tur_Codigo"));
+                t.setFecha(resultado.getString("Tur_Fecha"));
+                t.setHora(resultado.getString("Tur_Hora"));
+                t.setRetiro(resultado.getString("Tur_Retiro"));
+                s.setCodigoSol(resultado.getString("Sol_Codigo"));
+                s.setAsunto(resultado.getString("Sol_Asunto"));
+                s.setDetalle(resultado.getString("Sol_Detalle"));
+
+                listaTurno.add(t);
+            }
+            resultado.close();
+            return listaTurno;
+
+        } catch (SQLException e) {
+            System.out.println("Por favor, comuníquese con el administrador" + e);
+        }
+        return listaTurno;
+    }
 
     public String generarCodigoTurno() {
         try {

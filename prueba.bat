@@ -1,1 +1,0 @@
-cd C:\Users\LENOVO\Documents\NetBeansProjects\Turnero Respuesta Solicitudes SecretariaG\dist java -jar Turnero_Respuesta_Solicitudes_SecretariaG.jar
