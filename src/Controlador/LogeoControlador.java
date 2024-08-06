@@ -168,7 +168,7 @@ public class LogeoControlador {
         
         System.out.println("Seleccione su carrera:");
         System.out.println("-----------------------------------------------------------------------------------------------");
-        System.out.println("|1. " + carrera1);
+        System.out.println("1. " + carrera1);
         System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("2. " + carrera2);
         System.out.println("-----------------------------------------------------------------------------------------------");

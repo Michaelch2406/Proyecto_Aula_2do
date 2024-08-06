@@ -80,8 +80,8 @@ public class Turno extends Solicitud{
     public String consultarTurnoEst(){
         return "*----------- CONSULTA TURNO -------------*" + "\n" + 
                 "Codigo: " + getCodigo()+ "\n" + 
-                "Fecha de aprobación: " + getFecha()+ "\n" + 
-                "Hora de aprobación: "+ getHora()+ "\n" + 
+                "Fecha de retiro: " + getFecha()+ "\n" + 
+                "Hora de retiro: "+ getHora()+ "\n" + 
                 "Retiro: "+ getRetiro(); 
     }
     
