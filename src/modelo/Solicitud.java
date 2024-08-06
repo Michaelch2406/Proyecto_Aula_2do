@@ -8,8 +8,10 @@ package modelo;
  *
  * @author LENOVO
  */
-public class Solicitud extends Persona{
+public class Solicitud{
     private int idSolicitud;
+    //BUSCAR
+    private String codigoSol;
     private String fecha;
     private String asunto;
     private String detalle;
@@ -20,8 +22,9 @@ public class Solicitud extends Persona{
     public Solicitud() {
     }
 
-    public Solicitud(int idSolicitud, String fecha, String asunto, String detalle, String estado, int idPersona) {
+    public Solicitud(int idSolicitud, String codigoSol, String fecha, String asunto, String detalle, String estado, int idPersona) {
         this.idSolicitud = idSolicitud;
+        this.codigoSol = codigoSol;
         this.fecha = fecha;
         this.asunto = asunto;
         this.detalle = detalle;
@@ -30,12 +33,21 @@ public class Solicitud extends Persona{
     }
 
 
+
     public int getIdSolicitud() {
         return idSolicitud;
     }
 
     public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
+    }
+    
+    public String getCodigoSol() {
+        return codigoSol;
+    }
+
+    public void setCodigoSol(String codigoSol) {
+        this.codigoSol = codigoSol;
     }
 
     public String getFecha() {
@@ -69,6 +81,7 @@ public class Solicitud extends Persona{
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
 
     public int getIdPersona() {
         return idPersona;
@@ -78,6 +91,27 @@ public class Solicitud extends Persona{
         this.idPersona = idPersona;
     }
 
-    
+    public String imprimir(){
+        return "*----------- CONSULTA -------------*" + "\n" + 
+                "Código: " + getCodigoSol()+ "\n" + 
+                "Fecha: " + getFecha()+ "\n" + 
+                "Asunto: "+ getAsunto()+ "\n" + 
+                "Detalle: "+ getDetalle()+ "\n" + 
+                "Estado: "+ getEstado()+ "\n"; 
+    }
+    public String revisarSol(){
+        return "*----------- REVISIÓN -------------*" + "\n" + 
+                "Fecha: " + getFecha()+ "\n" + 
+                "Código: " + getCodigoSol()+ "\n" + 
+                "Asunto: "+ getAsunto()+ "\n" + 
+                "Detalle: "+ getDetalle()+ "\n" + 
+                "Estado: "+ getEstado()+ "\n"; 
+    }
+    public String editarsolicitud(){
+        return "*----------- EDITAR -------------*" + "\n" + 
+                "Fecha: " + getFecha()+ "\n" + 
+                "Asunto: "+ getAsunto()+ "\n" + 
+                "Detalle: "+ getDetalle(); 
+    }
     
 }

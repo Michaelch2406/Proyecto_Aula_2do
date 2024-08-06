@@ -96,8 +96,4 @@ public class Persona {
         this.clave = clave;
     }
 
-
-    public String  procesarSolicitud(){
-        return "";
-    }
 }

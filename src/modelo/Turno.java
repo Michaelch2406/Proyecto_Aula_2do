@@ -10,22 +10,23 @@ package modelo;
  */
 public class Turno {
     private int idTurno;
+    private String codigo;
     private String fecha;
     private String hora;
-    private String estado;
+    private String retiro;
     private int idSolicitud;
 
     public Turno() {
     }
 
-    public Turno(int idTurno, String fecha, String hora, String estado, int idSolicitud) {
+    public Turno(int idTurno, String codigo, String fecha, String hora, String retiro, int idSolicitud) {
         this.idTurno = idTurno;
+        this.codigo = codigo;
         this.fecha = fecha;
         this.hora = hora;
-        this.estado = estado;
+        this.retiro = retiro;
         this.idSolicitud = idSolicitud;
     }
-
 
 
     public int getIdTurno() {
@@ -34,6 +35,14 @@ public class Turno {
 
     public void setIdTurno(int idTurno) {
         this.idTurno = idTurno;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getFecha() {
@@ -52,13 +61,14 @@ public class Turno {
         this.hora = hora;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getRetiro() {
+        return retiro;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setRetiro(String retiro) {
+        this.retiro = retiro;
     }
+
 
     public int getIdSolicitud() {
         return idSolicitud;

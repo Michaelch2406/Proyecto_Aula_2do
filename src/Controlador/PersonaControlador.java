@@ -7,6 +7,7 @@ package Controlador;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import modelo.Estudiante;
 import modelo.Persona;
 import modelo.Secretaria;
@@ -41,7 +42,7 @@ public class PersonaControlador {
                         ejecutar.close(); //Siempre cierro mi conlsuta
                     }
                     
-        } catch (Exception e) { //Captura el error el (e)
+        } catch (SQLException e) { //Captura el error el (e)
             System.out.println("Por favor, Comuníquese con el Administrador, gracias!!"+e);
         } //Captura el error y permite que la consola se siga ejecutando
         
@@ -63,52 +64,30 @@ public class PersonaControlador {
             }
             return 0;
     }
-        
-        /**
-         * Se busca verificar el rol de la persona con el usuario logeado
-         * @param idPersona ID del usuario Logeado
-         * @return 
-         */
-        public int verificarRolSecretaria(int idPersona){
-
+   
+    public int buscarDatosPersona(int idPersona){
             try {
-                
-                String consultaSQL="select Sec_Id from secretarias where Per_Id='"+idPersona+"';";
+                String consultaSQL="select * from personas where Per_Id='"+idPersona+"';";
                 ejecutar=(PreparedStatement)connection.prepareCall(consultaSQL);
                 resultado=ejecutar.executeQuery();
-                
                 if(resultado.next()){
-                    int idSecretaria=resultado.getInt("Sec_Id"); //Lista Estática
-                    return idSecretaria;
+                    Persona p=new Persona();
+                    p.setNombre(resultado.getString("Per_Nombre")); //Lista Estática
+                    p.setApellido(resultado.getString("Per_Apellido")); //Lista Estática
+                    p.setCedula(resultado.getString("Per_Cedula")); //Lista Estática
+                    p.setTelefono(resultado.getString("Per_Telefono")); //Lista Estática
+                    p.setCorreo(resultado.getString("Per_Correo")); //Lista Estática
+                    p.setDireccion(resultado.getString("Per_Direccion")); //Lista Estática
+                    
+                    return idPersona;
                 }else{
-                    return 0;
+                    System.out.println("Ingrese una cédula válida");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 System.out.println("Por favor, comuníquese con el administrador"+e);
             }
             return 0;
-    }    
-    public void eliminarPersonas(String cedula){
-        try {
-            //String consultaSQL="delete from persona where cedula='"+cedula+"';";
-            String consultaSQL="delete from personas where cedula=?;";
-            ejecutar=(PreparedStatement)connection.prepareCall(consultaSQL);        
-            ejecutar.setString(1, cedula);
-            int res=ejecutar.executeUpdate();
-            if(res>0){
-                System.out.println("Acción exitosa");
-                ejecutar.close();
-            }else{
-                System.out.println("El usuario no existe");
-                ejecutar.close();
-            }       
-        } catch (Exception e) {
-            System.out.println(""+e);
-        }
-    
-    
     }
-    
     public int login(String cedula, String clave){
         int res=0;
         PreparedStatement preparedStatement = null;
@@ -131,14 +110,14 @@ public class PersonaControlador {
                 }
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("ERROR en la consulta de personas: " + e.getMessage());
             return res; // Retorna un mensaje de error si ocurre alguno
         } finally {
             try {
                 if (resultSet != null) resultSet.close();
                 if (preparedStatement != null) preparedStatement.close();
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
                 System.out.println("ERROR al cerrar los recursos: " + ex.getMessage());
             }
         }
@@ -161,7 +140,7 @@ public Persona buscardatosPersona(String cedula) {
             } else {
                 System.out.println("Ingrese una cédula válida");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Comuníquese con el administrador" + e);
         }
         return null;

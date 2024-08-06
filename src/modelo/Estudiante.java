@@ -10,17 +10,22 @@ package modelo;
  */
 public class Estudiante extends Persona{
     private int idEstudiante;
+    private String codigoEst;
     private String carrera;
-    private String nivel;
+    private int nivel;
     private int idPersona;
 
-    public Estudiante(int idEstudiante, String carrera, String nivel, int idPersona, String nombre, String apellido, String cedula, String clave, String telefono, String correo, String direccion) {
+    public Estudiante(int idEstudiante, String codigoEst, String carrera, int nivel,int idPersona, String nombre, String apellido, String cedula, String clave, String telefono, String correo, String direccion) {
         super(idPersona, nombre, apellido, cedula, clave, telefono, correo, direccion);
         this.idEstudiante = idEstudiante;
+        this.codigoEst = codigoEst;
         this.carrera = carrera;
         this.nivel = nivel;
         this.idPersona = idPersona;
     }
+
+
+
 
     public Estudiante() {
     }
@@ -33,6 +38,15 @@ public class Estudiante extends Persona{
         this.idEstudiante = idEstudiante;
     }
 
+    public String getCodigoEst() {
+        return codigoEst;
+    }
+
+    public void setCodigoEst(String codigoEst) {
+        this.codigoEst = codigoEst;
+    }
+
+
     public String getCarrera() {
         return carrera;
     }
@@ -41,11 +55,11 @@ public class Estudiante extends Persona{
         this.carrera = carrera;
     }
 
-    public String getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
-    public void setNivel(String nivel) {
+    public void setNivel(int nivel) {
         this.nivel = nivel;
     }
 
@@ -57,14 +71,16 @@ public class Estudiante extends Persona{
         this.idPersona = idPersona;
     }
         
-    public String solicitarCertificado(){
-        return "*----------- SOLICITUD -------------*" + "\n" + 
+    public String imprimir(){
+        return "*----------- Datos -------------*" + "\n" + 
+                "Código: " + getCodigoEst()+ "\n" +
                 "Nombre: " + getNombre()+ "\n" + 
                 "Apellido: "+ getApellido() + "\n" + 
                 "Cédula: "+ getCedula() + "\n" + 
                 "Teléfono: "+ getTelefono() + "\n" +
                 "Correo Electrónico: "+ getCorreo() + "\n" + 
                 "Dirección: "+ getDireccion() + "\n" +
-                "Carrera: " + getCarrera(); 
+                "Carrera: " + getCarrera() + "\n" +
+                "Nivel: " + getNivel(); 
     }
 }
