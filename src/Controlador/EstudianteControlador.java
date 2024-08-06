@@ -90,7 +90,7 @@ public class EstudianteControlador {
             while (resultado.next()) {
 
                 Estudiante e = new Estudiante();
-                e.setIdEstudiante(resultado.getInt("Est_Id"));
+                e.setCodigoEst(resultado.getString("Est_Codigo"));
                 e.setCarrera(resultado.getString("Est_Carrera"));
                 e.setNivel(resultado.getInt("Est_Nivel"));
                 e.setIdPersona(resultado.getInt("Per_Id"));

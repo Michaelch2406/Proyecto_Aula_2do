@@ -155,15 +155,15 @@ public class LogeoControlador {
 
         String carrera1 = "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE";
         String carrera2 = "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES";
-        String carrera3 = "TECNOLOGIA SUPERIOR EN ELECTRÓNICA";
-        String carrera4 = "TECNOLOGIA SUPERIOR EN AUTOMATIZACIÓN E INSTRUMENTACIÓN";
+        String carrera3 = "TECNOLOGIA SUPERIOR EN ELECTRONICA";
+        String carrera4 = "TECNOLOGIA SUPERIOR EN AUTOMATIZACION E INSTRUMENTACION";
         String carrera5 = "TECNOLOGIA SUPERIOR EN ELECTRICIDAD";
-        String carrera6 = "TECNOLOGIA SUPERIOR EN MECÁNICA INDUSTRIAL";
-        String carrera7 = "TECNOLOGIA SUPERIOR EN MECÁNICA AUTOMOTRIZ";
+        String carrera6 = "TECNOLOGIA SUPERIOR EN MECANICA INDUSTRIAL";
+        String carrera7 = "TECNOLOGIA SUPERIOR EN MECANICA AUTOMOTRIZ";
         String carrera8 = "TECNOLOGIA SUPERIOR EN ENTRENAMIENTO DEPORTIVO";
         String carrera9 = "TECNOLOGIA SUPERIOR EN PROCESAMIENTO DE ALIMENTOS";
-        String carrera10 = "TECNOLOGIA SUPERIOR EN QUÍMICA";
-        String carrera11 = "TECNOLOGIA SUPERIOR EN BIOTECNOLOGÍA";
+        String carrera10 = "TECNOLOGIA SUPERIOR EN QUIMICA";
+        String carrera11 = "TECNOLOGIA SUPERIOR EN BIOTECNOLOGIA";
         String carrera12 = "TECNOLOGIA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
         // Selección de carrera
         System.out.println("Seleccione su carrera: ");
@@ -241,7 +241,7 @@ public class LogeoControlador {
         EstudianteControlador estC = new EstudianteControlador();
         estC.crearEstudiante(est);
         System.out.println("Registro de estudiante completado exitosamente.");
-        pause(es);
+        //pause(es);
     }
 
     public void registrarSecretaria(Scanner es) {
