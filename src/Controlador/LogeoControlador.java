@@ -318,6 +318,31 @@ public class LogeoControlador {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine(); 
     }
+    
+    /**
+     *
+     * @param es
+     * @return
+     */
+    public boolean controlarSalida(Scanner es) {
+        System.out.println("Escribe 's' para salir o 'r' para regresar al menú:");
+        String input = es.nextLine().trim().toLowerCase();
+
+        switch (input) {
+            case "s" -> {
+                System.out.println("Saliendo del sistema...");
+                return true; // Indicador de salida del sistema
+            }
+            case "r" -> {
+                System.out.println("Regresando al menú...");
+                return false; // Indicador de regreso al menú
+            }
+            default -> {
+                System.out.println("Entrada no válida. Continuando...");
+                return false; // Continuar en la acción actual
+            }
+        }
+    }
 
     public boolean verificarCedula(String cedula) {
         // Expresión regular para encontrar exactamente 10 dígitos
