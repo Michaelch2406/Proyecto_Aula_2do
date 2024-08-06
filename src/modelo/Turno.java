@@ -77,6 +77,12 @@ public class Turno {
     public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
     }
-    
+    public String consultarTurnoEst(){
+        return "*----------- CONSULTA TURNO -------------*" + "\n" + 
+                "Codigo: " + getCodigo()+ "\n" + 
+                "Fecha de aprobación: " + getFecha()+ "\n" + 
+                "Hora de aprobación: "+ getHora()+ "\n" + 
+                "Retiro: "+ getRetiro(); 
+    }
     
 }

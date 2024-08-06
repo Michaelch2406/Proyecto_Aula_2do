@@ -103,7 +103,6 @@ public class LogeoControlador {
 //        } while (option != 0);
 //    }
     public void registrarEstudiante(Scanner es) {
-        LogeoControlador lc = new LogeoControlador();
         boolean cedulaValida = false;
         boolean telefonoValido = false;
         limpiarPantalla();
@@ -118,7 +117,7 @@ public class LogeoControlador {
             System.out.println("Ingrese el número de cédula: ");
             String cedula = es.nextLine();
 
-            if (lc.verificarCedula(cedula)) {
+            if (verificarCedula(cedula)) {
                 cedulaValida = true;
                 pe.setCedula(cedula);
             } else {
@@ -132,7 +131,7 @@ public class LogeoControlador {
             System.out.println("Ingrese su teléfono: ");
             String telefono = es.nextLine();
 
-            if (lc.verificarTelefono(telefono)) {
+            if (verificarTelefono(telefono)) {
                 telefonoValido = true;
                 pe.setTelefono(telefono);
             } else {

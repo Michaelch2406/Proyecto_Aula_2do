@@ -71,11 +71,13 @@ public class Main2 {
                                1. Crear Solicitud
                                2. Consultar Solicitud
                                3. Editar Solicitud
+                               4. Consultar Turno //EN PROCESO
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
             EstudianteControlador estC = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
+            TurnoControlador tc=new TurnoControlador();
             Solicitud s = new Solicitud();
             switch (op1) {
                 case 1 ->
@@ -86,6 +88,10 @@ public class Main2 {
                 case 3 -> {
                     sc.consultarSolicitudesMain(logeado);
                     estC.editarSolicitud();
+                }
+                case 4 -> {
+                    tc.consultarTurnoMain(logeado);
+                    tc.consultarTurno(logeado);
                 }
                 case 0 -> {
                     i = 0;

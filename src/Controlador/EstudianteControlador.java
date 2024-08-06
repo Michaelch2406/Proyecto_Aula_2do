@@ -182,7 +182,7 @@ public class EstudianteControlador {
                 System.out.println("La solicitud ha sido actualizada con éxito");
                 ejecutar.close(); //Siempre cierro mi conlsuta
             } else {
-                System.out.println("Favor ingrese correctamente los datos solicitados: ");
+                System.out.println("Favor ingrese correctamente los datos solicitados...");
                 ejecutar.close(); //Siempre cierro mi conlsuta
             }
 

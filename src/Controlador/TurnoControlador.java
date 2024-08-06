@@ -8,7 +8,9 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.Estudiante;
+import modelo.Solicitud;
 import modelo.Turno;
 
 /**
@@ -16,34 +18,84 @@ import modelo.Turno;
  * @author LENOVO
  */
 public class TurnoControlador {
+
     private Estudiante estudiante; //CON CADA CLASE
     private Turno turno;
     //conexión 
     //HACER CON CADA CONTROLADOR
-    ConexionBDD conexion=new ConexionBDD();
-    Connection connection=(Connection)conexion.conectar(); //UPCASTING (Connection) 
+    ConexionBDD conexion = new ConexionBDD();
+    Connection connection = (Connection) conexion.conectar(); //UPCASTING (Connection) 
     PreparedStatement ejecutar; //Ayuda a ejecutar la consulta que nosostros enviemos
-    ResultSet resultado; 
-    public void crearTurno(Turno t){
+    ResultSet resultado;
+
+    public void crearTurno(Turno t) {
         try { //Exception que lanza la consulta
             //String estático -> dinámicos que son los gets
-            String consultaSQL="INSERT INTO turnos(Tur_Codigo,Tur_Fecha,Tur_Hora,Tur_Retiro,Sol_Id) VALUES ('"+generarCodigoTurno()+"','"+t.getFecha()+"','"+t.getHora()+"','"+t.getRetiro()+"','"+t.getIdSolicitud()+"');";
-                    //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
-                    ejecutar=(PreparedStatement)connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
-                    //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA
-                    int res=ejecutar.executeUpdate(); 
-                    if(res>0){
-                        System.out.println("El turno ha sido creado con éxito");
-                        ejecutar.close(); //Siempre cierro mi conlsuta
-                    }else{
-                        System.out.println("Favor ingrese correctamente los datos solicitados: ");
-                        ejecutar.close(); //Siempre cierro mi conlsuta
-                    }
-                    
+            String consultaSQL = "INSERT INTO turnos(Tur_Codigo,Tur_Fecha,Tur_Hora,Tur_Retiro,Sol_Id) VALUES ('" + generarCodigoTurno() + "','" + t.getFecha() + "','" + t.getHora() + "','" + t.getRetiro() + "','" + t.getIdSolicitud() + "');";
+            //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
+            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
+            //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA
+            int res = ejecutar.executeUpdate();
+            if (res > 0) {
+                System.out.println("El turno ha sido creado con éxito");
+                ejecutar.close(); //Siempre cierro mi conlsuta
+            } else {
+                System.out.println("Favor ingrese correctamente los datos solicitados: ");
+                ejecutar.close(); //Siempre cierro mi conlsuta
+            }
+
         } catch (SQLException e) { //Captura el error el (e)
-            System.out.println("Por favor, Comuníquese con el Administrador, gracias!!"+e);
+            System.out.println("Por favor, Comuníquese con el Administrador, gracias!!" + e);
         } //Captura el error y permite que la consola se siga ejecutando
     }
+
+    public void consultarTurnoMain(int logeado) {
+        ArrayList<Turno> listaTurnos = consultarTurno(logeado);
+        for (Turno t : listaTurnos) {
+            System.out.println(t.consultarTurnoEst());
+        }
+    }
+
+    public ArrayList<Turno> consultarTurno(int idSolicitud) {
+        ArrayList<Turno> listaTurnos = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+// Usamos StringBuilder para construir la cadena de resultados
+
+        try {
+            String consultaSQL = "SELECT * FROM turnos WHERE Tur_Retiro='Ir a retirar' AND Sol_Id=" + idSolicitud + ";";
+            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
+
+            resultado = ejecutar.executeQuery();
+
+            while (resultado.next()) {
+                Turno t = new Turno();
+                t.setCodigo(resultado.getString("Tur_Codigo"));
+                t.setFecha(resultado.getString("Tur_Fecha"));
+                t.setHora(resultado.getString("Tur_Hora"));
+                t.setRetiro(resultado.getString("Tur_Retiro"));
+                listaTurnos.add(t);
+            }
+            resultado.close();
+            return listaTurnos;
+        } catch (SQLException e) {
+            System.out.println("ERROR en la consulta de solicitudes: " + e.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("ERROR al cerrar los recursos: " + ex.getMessage());
+            }
+        }
+        return null;
+
+    }
+
     public String generarCodigoTurno() {
         try {
             String consultaSQL = "SELECT Tur_Codigo FROM turnos ORDER BY Tur_Id DESC LIMIT 1;";

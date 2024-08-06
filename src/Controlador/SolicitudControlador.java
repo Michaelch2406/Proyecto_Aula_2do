@@ -221,33 +221,6 @@ public class SolicitudControlador {
 
         return resultado.toString(); // Retorna la cadena completa de resultados
     }
-
-    public ArrayList<Solicitud> consultarSolicitudEst(int idPersona) {
-        ArrayList<Solicitud> listaSolicitudes = new ArrayList<>();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-
-            String consultaSQL = "select * from solicitudes where Per_Id='" + idPersona + "';";
-            preparedStatement = (PreparedStatement) connection.prepareStatement(consultaSQL);
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Solicitud solicitud = new Solicitud();
-                solicitud.setCodigoSol(resultSet.getString("Sol_Codigo"));
-                solicitud.setFecha(resultSet.getString("Sol_Fecha"));
-                solicitud.setAsunto(resultSet.getString("Sol_Asunto"));
-                solicitud.setDetalle(resultSet.getString("Sol_Detalle"));
-                solicitud.setEstado(resultSet.getString("Sol_Estado"));
-                // Agregar la solicitud a la lista
-                listaSolicitudes.add(solicitud);
-            }
-        } catch (SQLException e) {
-            System.out.println("Por favor, comuníquese con el administrador" + e);
-        }
-        return listaSolicitudes;
-    }
     
     public void revisarSolicitudesMain(Scanner es) {
         Solicitud so = new Solicitud();
@@ -390,29 +363,6 @@ public class SolicitudControlador {
         } catch (SQLException e) { //Captura el error el (e)
             System.out.println("Comuníquese con el Administrador, gracias!!:" + e);
         } //Captura el error y permite que la consola se siga ejecutando
-    }
-
-    public void editarSolicitudEst(Solicitud s) {
-        try {
-            // Verificar si la solicitud no está aprobada o aceptada
-            String consultaSQL = "UPDATE solicitudes SET Sol_Asunto = ?,Sol_Detalle = ?,Sol_Estado = ? WHERE Sol_Codigo = ? AND NOT (Sol_Estado = 'Aprobado' OR Sol_Estado = 'Aceptado');";
-            PreparedStatement ejecutar = (PreparedStatement) connection.prepareStatement(consultaSQL);
-            ejecutar.setString(1, s.getAsunto());
-            ejecutar.setString(1, s.getDetalle());
-            ejecutar.setString(2, s.getEstado());
-            ejecutar.setString(3, s.getCodigoSol());
-
-            int res = ejecutar.executeUpdate();
-            if (res > 0) {
-                System.out.println("La solicitud ha sido actualizada con éxito.");
-            } else {
-                System.out.println("No se pudo actualizar la solicitud. La solicitud ya está aprobada o aceptada, o el código es incorrecto.");
-            }
-
-            ejecutar.close();
-        } catch (SQLException e) {
-            System.out.println("Comuníquese con el Administrador, gracias: " + e.getMessage());
-        }
     }
 
 }
