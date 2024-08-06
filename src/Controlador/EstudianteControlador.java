@@ -97,7 +97,6 @@ public class EstudianteControlador {
                 e.setNombre(resultado.getString("Per_Nombre"));
                 e.setApellido(resultado.getString("Per_Apellido"));
                 e.setCedula(resultado.getString("Per_Cedula"));
-
                 e.setTelefono(resultado.getString("Per_Telefono"));
                 e.setCorreo(resultado.getString("Per_Correo"));
                 e.setDireccion(resultado.getString("Per_Direccion"));

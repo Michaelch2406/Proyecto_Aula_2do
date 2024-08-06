@@ -40,17 +40,17 @@ public class Main2 {
                     + "1. Iniciar Sesión\n"
                     + "2. Registrarse como Estudiante\n"
                     + "0. Salir");
-            int mainOption = lc.leerOpcion(es);
-            es.nextLine(); // Consumir el salto de línea residual
+            String mainOption = es.next();
 
             switch (mainOption) {// 1
-                case 1 ->
+                case "1" ->
                     lc.iniciarSesion(es);
-                case 2 ->
+                case "2" ->
                     lc.registrarEstudiante(es);
-                case 0 -> {
+                case "0" -> {
                     i = 0;
                     System.out.println("Gracias por usar el sistema!");
+                    break;
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
