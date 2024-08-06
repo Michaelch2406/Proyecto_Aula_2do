@@ -55,9 +55,7 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            if (lc.controlarSalida(es)) {
-                return; // Si el usuario elige salir, vuelve al menú principal
-            }
+            
         } while (i == 1);
     }
 
@@ -66,7 +64,7 @@ public class Main2 {
         int i = 1;
         do {
             lc.limpiarPantalla();
-            System.out.println("*-------BIENVENIDO AL SISTEMA-------*");
+            System.out.println("            BIENVENIDO AL       ");
             System.out.println("*----------MENU ESTUDIANTE----------*");
             System.out.println("""
                                Elija la opción que necesite:
@@ -74,7 +72,7 @@ public class Main2 {
                                2. Consultar Solicitud
                                3. Editar Solicitud
                                0. Salir""");
-            int op1 = es.nextInt();
+            int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
             EstudianteControlador estC = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
@@ -96,12 +94,13 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            if (lc.controlarSalida(es)) {
-                return; // Si el usuario elige salir, vuelve al menú principal
-            }
+            
             System.out.println(""); // Línea en blanco para separación
             System.out.println("Presione Enter para continuar...");
             es.nextLine(); // Pausa esperando que el usuario presione Enter
+            if (lc.controlarSalida(es)) {
+                return;
+            }
             
         } while (i == 1);
     }
@@ -113,14 +112,14 @@ public class Main2 {
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
             lc.limpiarPantalla();
-            System.out.println("*-------BIENVENIDO AL SISTEMA-------*");
+            System.out.println("            BIENVENIDO AL        ");
             System.out.println("*----------MENU SECRETARIA----------*");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                0. Salir""");
-            int op1 = es.nextInt();
+            int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
 
             switch (op1) {
@@ -135,10 +134,10 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
+            LogeoControlador.pause();
             if (lc.controlarSalida(es)) {
                 return; // Si el usuario elige salir, vuelve al menú principal
             }
-            LogeoControlador.pause();
         } while (i == 1);
     }
 
@@ -148,14 +147,14 @@ public class Main2 {
             AdministradorControlador adm = new AdministradorControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
-            System.out.println("*---------BIENVENIDO AL SISTEMA--------*");
+            System.out.println("             BIENVENIDO AL       ");
             System.out.println("*----------MENU ADMINISTRADOR----------*");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Registrar secretarias
                                2. Consultar secretarias
                                0. Salir""");
-            int op1 = es.nextInt();
+            int op1 = lg.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
 
             switch (op1) {
@@ -170,10 +169,11 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            if (lg.controlarSalida(es)) {
+            LogeoControlador.pause();
+            if (!lg.controlarSalida(es)) {
+            } else {
                 return; // Si el usuario elige salir, vuelve al menú principal
             }
-            LogeoControlador.pause();
         } while (i == 1);
     }
 }

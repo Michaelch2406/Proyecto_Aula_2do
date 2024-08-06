@@ -129,16 +129,16 @@ public class LogeoControlador {
         System.out.println("Ingrese su contraseña: ");
         pe.setClave(es.nextLine());
         do {
-        System.out.println("Ingrese su teléfono: ");
-        String telefono = es.nextLine();
+            System.out.println("Ingrese su teléfono: ");
+            String telefono = es.nextLine();
 
-        if (lc.verificarTelefono(telefono)) {
-            telefonoValido = true;
-            pe.setTelefono(telefono);
-        } else {
-            System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
-        }
-    } while (!telefonoValido);
+            if (lc.verificarTelefono(telefono)) {
+                telefonoValido = true;
+                pe.setTelefono(telefono);
+            } else {
+                System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+            }
+        } while (!telefonoValido);
         System.out.println("Ingrese su correo Electrónico: ");
         pe.setCorreo(es.nextLine());
         System.out.println("Ingrese su Dirección: ");
@@ -270,16 +270,16 @@ public class LogeoControlador {
         System.out.println("Ingrese su contraseña: ");
         pe.setClave(es.nextLine());
         do {
-        System.out.println("Ingrese su teléfono: ");
-        String telefono = es.nextLine();
+            System.out.println("Ingrese su teléfono: ");
+            String telefono = es.nextLine();
 
-        if (lc.verificarTelefono(telefono)) {
-            telefonoValido = true;
-            pe.setTelefono(telefono);
-        } else {
-            System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
-        }
-    } while (!telefonoValido);
+            if (lc.verificarTelefono(telefono)) {
+                telefonoValido = true;
+                pe.setTelefono(telefono);
+            } else {
+                System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+            }
+        } while (!telefonoValido);
         System.out.println("Ingrese su correo Electrónico: ");
         pe.setCorreo(es.nextLine());
         System.out.println("Ingrese su Dirección: ");
@@ -312,13 +312,13 @@ public class LogeoControlador {
         } catch (IOException | InterruptedException e) {
         }
     }
-    
+
     public static void pause() {
         System.out.print("Presiona Enter para continuar...");
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine(); 
+        scanner.nextLine();
     }
-    
+
     /**
      *
      * @param es
@@ -344,6 +344,25 @@ public class LogeoControlador {
         }
     }
 
+    public int leerOpcion(Scanner es) {
+        int opcion = -1;
+        boolean entradaValida = false;
+
+        do {
+            System.out.print("Seleccione una opción: ");
+            if (es.hasNextInt()) {  // Verifica si la entrada es un número entero
+                opcion = es.nextInt();
+                entradaValida = true;  // Si es un número entero, la entrada es válida
+            } else {
+                System.out.println("Opción no válida. Por favor, intente nuevamente.");
+                es.next();  // Descarta la entrada incorrecta
+            }
+            es.nextLine();  // Consumir el salto de línea residual
+        } while (!entradaValida);  // Repite hasta que la entrada sea válida
+
+        return opcion;
+    }
+
     public boolean verificarCedula(String cedula) {
         // Expresión regular para encontrar exactamente 10 dígitos
         String regex = "\\b\\d{10}\\b";
@@ -355,16 +374,17 @@ public class LogeoControlador {
         // Verificar si la cédula coincide con la expresión regular
         return matcher.matches();
     }
+
     public boolean verificarTelefono(String telefono) {
-    // Expresión regular para encontrar exactamente 10 dígitos
-    String regex = "^09\\d{8}$";
+        // Expresión regular para encontrar exactamente 10 dígitos
+        String regex = "^09\\d{8}$";
 
-    // Compilar la expresión regular
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(telefono);
+        // Compilar la expresión regular
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(telefono);
 
-    // Verificar si coincide
-    return matcher.matches();
-}
+        // Verificar si coincide
+        return matcher.matches();
+    }
 
 }
