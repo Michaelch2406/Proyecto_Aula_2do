@@ -153,18 +153,18 @@ public class LogeoControlador {
         Estudiante est = new Estudiante();
         System.out.println("Ingrese el código de estudiante");
 
-        String carrera1 = "TECNOLOGÍA SUPERIOR EN DESARROLLO DE SOFTWARE";
-        String carrera2 = "TECNOLOGÍA SUPERIOR EN REDES Y TELECOMUNICACIONES";
-        String carrera3 = "TECNOLOGÍA SUPERIOR EN ELECTRÓNICA";
-        String carrera4 = "TECNOLOGÍA SUPERIOR EN AUTOMATIZACIÓN E INSTRUMENTACIÓN";
-        String carrera5 = "TECNOLOGÍA SUPERIOR EN ELECTRICIDAD";
-        String carrera6 = "TECNOLOGÍA SUPERIOR EN MECÁNICA INDUSTRIAL";
-        String carrera7 = "TECNOLOGÍA SUPERIOR EN MECÁNICA AUTOMOTRIZ";
-        String carrera8 = "TECNOLOGÍA SUPERIOR EN ENTRENAMIENTO DEPORTIVO";
-        String carrera9 = "TECNOLOGÍA SUPERIOR EN PROCESAMIENTO DE ALIMENTOS";
-        String carrera10 = "TECNOLOGÍA SUPERIOR EN QUÍMICA";
-        String carrera11 = "TECNOLOGÍA SUPERIOR EN BIOTECNOLOGÍA";
-        String carrera12 = "TECNOLOGÍA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
+        String carrera1 = "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE";
+        String carrera2 = "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES";
+        String carrera3 = "TECNOLOGIA SUPERIOR EN ELECTRÓNICA";
+        String carrera4 = "TECNOLOGIA SUPERIOR EN AUTOMATIZACIÓN E INSTRUMENTACIÓN";
+        String carrera5 = "TECNOLOGIA SUPERIOR EN ELECTRICIDAD";
+        String carrera6 = "TECNOLOGIA SUPERIOR EN MECÁNICA INDUSTRIAL";
+        String carrera7 = "TECNOLOGIA SUPERIOR EN MECÁNICA AUTOMOTRIZ";
+        String carrera8 = "TECNOLOGIA SUPERIOR EN ENTRENAMIENTO DEPORTIVO";
+        String carrera9 = "TECNOLOGIA SUPERIOR EN PROCESAMIENTO DE ALIMENTOS";
+        String carrera10 = "TECNOLOGIA SUPERIOR EN QUÍMICA";
+        String carrera11 = "TECNOLOGIA SUPERIOR EN BIOTECNOLOGÍA";
+        String carrera12 = "TECNOLOGIA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
         // Selección de carrera
         System.out.println("Seleccione su carrera: ");
         System.out.println("1. " + carrera1);
@@ -241,6 +241,7 @@ public class LogeoControlador {
         EstudianteControlador estC = new EstudianteControlador();
         estC.crearEstudiante(est);
         System.out.println("Registro de estudiante completado exitosamente.");
+        pause(es);
     }
 
     public void registrarSecretaria(Scanner es) {
@@ -299,6 +300,7 @@ public class LogeoControlador {
         AdministradorControlador admC = new AdministradorControlador();
         admC.crearSecretaria(sec);
         System.out.println("Registro de secretaria completado exitosamente.");
+        pause();
     }
 
     public void limpiarPantalla() {
@@ -315,33 +317,8 @@ public class LogeoControlador {
 
     public static void pause() {
         System.out.print("Presiona Enter para continuar...");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-    }
-
-    /**
-     *
-     * @param es
-     * @return
-     */
-    public boolean controlarSalida(Scanner es) {
-        System.out.println("Escribe 's' para salir o 'r' para regresar al menú:");
-        String input = es.nextLine().trim().toLowerCase();
-
-        switch (input) {
-            case "s" -> {
-                System.out.println("Saliendo del sistema...");
-                return true; // Indicador de salida del sistema
-            }
-            case "r" -> {
-                System.out.println("Regresando al menú...");
-                return false; // Indicador de regreso al menú
-            }
-            default -> {
-                System.out.println("Entrada no válida. Continuando...");
-                return false; // Continuar en la acción actual
-            }
-        }
+        Scanner es = new Scanner(System.in);
+        es.nextLine();
     }
 
     public int leerOpcion(Scanner es) {
@@ -385,6 +362,10 @@ public class LogeoControlador {
 
         // Verificar si coincide
         return matcher.matches();
+    }
+
+    private void pause(Scanner es) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

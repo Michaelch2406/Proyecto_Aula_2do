@@ -40,7 +40,7 @@ public class Main2 {
                     + "1. Iniciar Sesión\n"
                     + "2. Registrarse como Estudiante\n"
                     + "0. Salir");
-            int mainOption = es.nextInt();
+            int mainOption = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
 
             switch (mainOption) {// 1
@@ -64,8 +64,8 @@ public class Main2 {
         int i = 1;
         do {
             lc.limpiarPantalla();
-            System.out.println("            BIENVENIDO AL       ");
-            System.out.println("*----------MENU ESTUDIANTE----------*");
+            System.out.println("*--------------BIENVENIDO AL--------------*");
+            System.out.println("              MENU ESTUDIANTE");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Crear Solicitud
@@ -98,9 +98,6 @@ public class Main2 {
             System.out.println(""); // Línea en blanco para separación
             System.out.println("Presione Enter para continuar...");
             es.nextLine(); // Pausa esperando que el usuario presione Enter
-            if (lc.controlarSalida(es)) {
-                return;
-            }
             
         } while (i == 1);
     }
@@ -112,8 +109,8 @@ public class Main2 {
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
             lc.limpiarPantalla();
-            System.out.println("            BIENVENIDO AL        ");
-            System.out.println("*----------MENU SECRETARIA----------*");
+            System.out.println("*--------------BIENVENIDO AL--------------*");
+            System.out.println("              MENU SECRETARIA");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Consultar Estudiantes
@@ -134,10 +131,6 @@ public class Main2 {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            LogeoControlador.pause();
-            if (lc.controlarSalida(es)) {
-                return; // Si el usuario elige salir, vuelve al menú principal
-            }
         } while (i == 1);
     }
 
@@ -147,8 +140,8 @@ public class Main2 {
             AdministradorControlador adm = new AdministradorControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
-            System.out.println("             BIENVENIDO AL       ");
-            System.out.println("*----------MENU ADMINISTRADOR----------*");
+            System.out.println("*--------------BIENVENIDO AL--------------*");
+            System.out.println("             MENU ADMINISTRADOR");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Registrar secretarias
@@ -170,10 +163,6 @@ public class Main2 {
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
             LogeoControlador.pause();
-            if (!lg.controlarSalida(es)) {
-            } else {
-                return; // Si el usuario elige salir, vuelve al menú principal
-            }
         } while (i == 1);
     }
 }
