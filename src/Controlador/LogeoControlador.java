@@ -312,6 +312,12 @@ public class LogeoControlador {
         } catch (IOException | InterruptedException e) {
         }
     }
+    
+    public static void pause() {
+        System.out.print("Presiona Enter para continuar...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine(); 
+    }
 
     public boolean verificarCedula(String cedula) {
         // Expresión regular para encontrar exactamente 10 dígitos
