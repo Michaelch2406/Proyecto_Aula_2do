@@ -177,7 +177,7 @@ public class Main2 {
                 case 4 ->
                     lg.registrarEstudiante(es);
                 case 5 ->
-                    adm.consultarSecretarias(); //FALTA ELIMINAR ESTUDIANTES
+                    adm.eliminarEstudiantes();//FALTA ELIMINAR ESTUDIANTESSystem.out.println("Ingrese el número de cédula de la persona a eliminar:");
                 case 6 ->
                     adm.consultarSecretarias(); //FALTA ELIMINAR SECRETARIAS
                 case 0 -> {

@@ -1,1 +1,0 @@
-java -jar Turnero_Respuesta_Solicitudes_SecretariaG.jar

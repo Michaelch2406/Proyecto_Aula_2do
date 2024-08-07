@@ -102,6 +102,32 @@ public class AdministradorControlador {
             System.out.println("Por favor, comuníquese con el administrador" + e);
         }
     }
+     
+     
+    /**
+     * delete from persona where cedula='10035555';
+     */
+    public void eliminarEstudiantes(){
+        try {
+            Estudiante e=new Estudiante();
+            //String consultaSQL="delete from persona where cedula='"+cedula+"';";
+            String consultaSQL="delete from estudiantes where Est_Codigo='" + e.getCodigoEst() + "';";
+            ejecutar=(PreparedStatement)connection.prepareCall(consultaSQL);        
+            ejecutar.setString(1, consultaSQL);
+            int res=ejecutar.executeUpdate();
+            if(res>0){
+                System.out.println("Estudiante eliminado exitosamente");
+                ejecutar.close();
+            }else{
+                System.out.println("El usuario no existe");
+                ejecutar.close();
+            }       
+        } catch (SQLException e) {
+            System.out.println(""+e);
+        }
+    
+    
+    } 
 
     public int verificarRolAdministrador(int idPersona){
 
