@@ -175,53 +175,6 @@ public class SolicitudControlador {
 
     }
 
-    public String consultarSolicitud() {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        StringBuilder resultado = new StringBuilder(); // Usamos StringBuilder para construir la cadena de resultados
-
-        try {
-            String consultaSQL = "SELECT * FROM solicitudes";
-            preparedStatement = (PreparedStatement) connection.prepareStatement(consultaSQL);
-
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int solId = resultSet.getInt("Sol_Id");
-                String solFecha = resultSet.getString("Sol_Fecha"); // Ahora tratamos la fecha como un String
-                String solAsunto = resultSet.getString("Sol_Asunto");
-                String solDetalle = resultSet.getString("Sol_Detalle");
-                String solEstado = resultSet.getString("Sol_Estado");
-                int idPersona = resultSet.getInt("Per_Id");
-
-                // Construyendo la cadena de resultados
-                resultado.append("ID: ").append(solId).append("\n") //Append lista de strings
-                        .append(" Fecha: ").append(solFecha).append("\n") // Directamente añadimos la fecha como cadena
-                        .append(" Asunto: ").append(solAsunto).append("\n")
-                        .append(" Detalle: ").append(solDetalle).append("\n")
-                        .append(" Estado: ").append(solEstado).append("\n")
-                        .append(" Id Persona: ").append(idPersona)
-                        .append("\n"); // Agrega un salto de línea entre registros
-            }
-        } catch (SQLException e) {
-            System.out.println("ERROR en la consulta de solicitudes: " + e.getMessage());
-            return "Error en la consulta: " + e.getMessage(); // Retorna un mensaje de error si ocurre alguno
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("ERROR al cerrar los recursos: " + ex.getMessage());
-            }
-        }
-
-        return resultado.toString(); // Retorna la cadena completa de resultados
-    }
-    
     public void revisarSolicitudesMain(Scanner es) {
         Solicitud so = new Solicitud();
         SolicitudControlador scr = new SolicitudControlador();
@@ -312,18 +265,17 @@ public class SolicitudControlador {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Solicitud solicitud = new Solicitud();
-                solicitud.setIdSolicitud(resultSet.getInt("Sol_Id"));
-                solicitud.setCodigoSol(resultSet.getString("Sol_Codigo"));
-                solicitud.setFecha(resultSet.getString("Sol_Fecha"));
-                solicitud.setAsunto(resultSet.getString("Sol_Asunto"));
-                solicitud.setDetalle(resultSet.getString("Sol_Detalle"));
-                solicitud.setEstado(resultSet.getString("Sol_Estado"));
-                // NO SE DEBE MOSTRAR?
-                solicitud.setIdPersona(resultSet.getInt("Per_Id"));
+                Solicitud s = new Solicitud();
+                s.setIdSolicitud(resultSet.getInt("Sol_Id"));
+                s.setCodigoSol(resultSet.getString("Sol_Codigo"));
+                s.setFecha(resultSet.getString("Sol_Fecha"));
+                s.setAsunto(resultSet.getString("Sol_Asunto"));
+                s.setDetalle(resultSet.getString("Sol_Detalle"));
+                s.setEstado(resultSet.getString("Sol_Estado"));
+                s.setIdPersona(resultSet.getInt("Per_Id"));
 
-                // Agregar la solicitud a la lista
-                listaSolicitudes.add(solicitud);
+                // Agregar la s a la lista
+                listaSolicitudes.add(s);
             }
         } catch (SQLException e) {
             System.out.println("ERROR en la consulta de solicitudes: " + e.getMessage());

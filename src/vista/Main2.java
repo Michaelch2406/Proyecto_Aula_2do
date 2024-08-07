@@ -35,12 +35,6 @@ public class Main2 {
 
         do {
             lc.limpiarPantalla();
-//            System.out.println("░██████╗░█████╗░██╗░░░░░██╗░█████╗░██╗████████╗██╗░░░██╗██████╗░███████╗░██████╗");
-//            System.out.println(" ██╔════╝██╔══██╗██║░░░░░██║██╔══██╗██║╚══██╔══╝██║░░░██║██╔══██╗██╔════╝██╔════╝");
-//            System.out.println("╚█████╗░██║░░██║██║░░░░░██║██║░░╚═╝██║░░░██║░░░██║░░░██║██║░░██║█████╗░░╚█████╗░");
-//            System.out.println("░╚═══██╗██║░░██║██║░░░░░██║██║░░██╗██║░░░██║░░░██║░░░██║██║░░██║██╔══╝░░░╚═══██╗");
-//            System.out.println("██████╔╝╚█████╔╝███████╗██║╚█████╔╝██║░░░██║░░░╚██████╔╝██████╔╝███████╗██████╔╝");
-//            System.out.println("╚═════╝░░╚════╝░╚══════╝╚═╝░╚════╝░╚═╝░░░╚═╝░░░░╚═════╝░╚═════╝░╚══════╝╚═════╝░");
             //System.out.println("ʕ•́ᴥ•̀ʔっ");
 
             System.out.println("BIENVENIDO AL SISTEMA");
@@ -130,6 +124,7 @@ public class Main2 {
                                Elija la opción que necesite:
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
+                               3. Consultar Solicitudes //EN PROCESO
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
@@ -139,6 +134,8 @@ public class Main2 {
                     ec.consultarEstudiantesMain();
                 case 2 ->
                     sc.revisarSolicitudesMain(es);
+                case 3 ->
+                    sc.consultarSolicitudesMain(logeado);
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");
@@ -153,6 +150,7 @@ public class Main2 {
         int i = 1;
         do {
             AdministradorControlador adm = new AdministradorControlador();
+            EstudianteControlador ec=new EstudianteControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
@@ -161,15 +159,27 @@ public class Main2 {
                                Elija la opción que necesite:
                                1. Registrar secretarias
                                2. Consultar secretarias
+                               3. Consultar estudiantes
+                               4. Registrar estudiantes
+                               5. Eliminar estudiantes
+                               6. Eliminar secretarias
                                0. Salir""");
             int op1 = lg.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
 
             switch (op1) {
                 case 1 ->
-                    lg.registrarSecretaria(es);
+                    lg.registrarSecretaria(es); 
                 case 2 ->
                     adm.consultarSecretarias();
+                case 3 ->
+                    ec.consultarEstudiantesMain();
+                case 4 ->
+                    lg.registrarEstudiante(es);
+                case 5 ->
+                    adm.consultarSecretarias(); //FALTA ELIMINAR ESTUDIANTES
+                case 6 ->
+                    adm.consultarSecretarias(); //FALTA ELIMINAR SECRETARIAS
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");

@@ -65,6 +65,11 @@ public class PersonaControlador {
             return 0;
     }
    
+    /**
+     * NO SE UTILIZA POR EL MOMENTO ESTE CÓDIGO
+     * @param idPersona
+     * @return 
+     */
     public int buscarDatosPersona(int idPersona){
             try {
                 String consultaSQL="select * from personas where Per_Id='"+idPersona+"';";
