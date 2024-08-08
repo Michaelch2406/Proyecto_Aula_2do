@@ -35,7 +35,7 @@ public class Main {
 
         do {
             lc.limpiarPantalla();
-            //System.out.println("ʕ•́ᴥ•̀ʔっ");
+            System.out.println("ʕ•́ᴥ•̀ʔっ");
 
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
@@ -53,7 +53,7 @@ public class Main {
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el sistema!");
-                    
+
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
@@ -71,10 +71,10 @@ public class Main {
             System.out.println("              MENU ESTUDIANTE");
             System.out.println("""
                                Elija la opción que necesite:
-                               1. Crear Solicitud
+                               1. Crear Solicitud //EN PROCESO CREAR UN DETALLE PREDETERMINADO PARA CADA TIPO DE CERTIFICADO
                                2. Consultar Solicitud
                                3. Editar Solicitud
-                               4. Consultar Turno //EN PROCESO
+                               4. Consultar Turno //EN PROCESO FALTA DIA DE RETIRO, Y QUE SE ACTUALICE CUANDO VAYA A RETIRAR COMO RETIRADO
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
@@ -124,7 +124,7 @@ public class Main {
                                Elija la opción que necesite:
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
-                               3. Consultar Solicitudes //EN PROCESO
+                               3. Consultar Solicitudes //EN PROCESO FALTA NOMBRE Y APELLIDO DE ESTUDIANTE
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
@@ -135,7 +135,7 @@ public class Main {
                 case 2 ->
                     sc.revisarSolicitudesMain(es);
                 case 3 ->
-                    sc.consultarSolicitudesMain(logeado);
+                    sc.consultarSolEst();
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");
@@ -150,8 +150,8 @@ public class Main {
         int i = 1;
         do {
             AdministradorControlador adm = new AdministradorControlador();
-            SecretariaControlador sec=new SecretariaControlador();
-            EstudianteControlador ec=new EstudianteControlador();
+            SecretariaControlador sec = new SecretariaControlador();
+            EstudianteControlador ec = new EstudianteControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
@@ -170,7 +170,7 @@ public class Main {
 
             switch (op1) {
                 case 1 ->
-                    lg.registrarSecretaria(es); 
+                    lg.registrarSecretaria(es);
                 case 2 ->
                     adm.consultarSecretarias();
                 case 3 ->
@@ -180,7 +180,7 @@ public class Main {
                 case 5 ->
                     adm.eliminarEst(es);
                 case 6 ->
-                    sec.eliminarSec(es); 
+                    sec.eliminarSec(es);
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");

@@ -107,38 +107,39 @@ public class AdministradorControlador {
     }
 
     public void eliminarEst(Scanner es) {
-    es.nextLine();
-    EstudianteControlador est = new EstudianteControlador();
-    Persona p = new Persona();
-    Estudiante e = new Estudiante();
-    est.consultarEstudiantesMain();
-    System.out.println("Elija el código del estudiante para eliminar:");
-    e.setCodigoEst(es.nextLine());
+        es.nextLine();
+        EstudianteControlador est = new EstudianteControlador();
+        Persona p = new Persona();
+        Estudiante e = new Estudiante();
+        est.consultarEstudiantesMain();
+        System.out.println("Elija el código del estudiante para eliminar:");
+        e.setCodigoEst(es.nextLine());
 
-    System.out.println("¿Seguro/a quiere eliminar al estudiante?");
-    System.out.println("1. Sí");
-    System.out.println("2. No");
-    
-    int opcion = 0;
-    do {
-        try {
-            opcion = es.nextInt();
-            es.nextLine(); // Consumir el salto de línea residual
-            switch (opcion) {
-                case 1 -> eliminarEstudiantes(e);
-                case 2 -> {
-                    System.out.println("Eliminación cancelada.");
-                    return;
+        System.out.println("¿Seguro/a quiere eliminar al estudiante?");
+        System.out.println("1. Sí");
+        System.out.println("2. No");
+
+        int opcion = 0;
+        do {
+            try {
+                opcion = es.nextInt();
+                es.nextLine(); // Consumir el salto de línea residual
+                switch (opcion) {
+                    case 1 ->
+                        eliminarEstudiantes(e);
+                    case 2 -> {
+                        System.out.println("Eliminación cancelada.");
+                        return;
+                    }
+                    default ->
+                        System.out.println("Opción no válida. Por favor, elija 1 para Sí o 2 para No.");
                 }
-                default -> System.out.println("Opción no válida. Por favor, elija 1 para Sí o 2 para No.");
+            } catch (Exception ex) {
+                System.out.println("Opción no válida. Por favor, ingrese un número.");
+                es.nextLine(); // Limpiar el buffer de entrada
             }
-        } catch (Exception ex) {
-            System.out.println("Opción no válida. Por favor, ingrese un número.");
-            es.nextLine(); // Limpiar el buffer de entrada
-        }
-    } while (opcion != 1 && opcion != 2);
-}
-
+        } while (opcion != 1 && opcion != 2);
+    }
 
     /**
      * delete from persona where cedula='10035555';
@@ -146,42 +147,40 @@ public class AdministradorControlador {
      * @param est
      */
     public void eliminarEstudiantes(Estudiante est) {
-    try {
-        // Obtener el Per_Id del estudiante a eliminar
-        String consultaIdPersona = "SELECT Per_Id FROM estudiantes WHERE Est_Codigo='" + est.getCodigoEst() + "';";
-        Statement statement = (Statement) connection.createStatement();
-        ResultSet rs = statement.executeQuery(consultaIdPersona);
-        
-        if (rs.next()) {
-            int perId = rs.getInt("Per_Id");
-            
-            // Eliminar el estudiante de la tabla estudiantes
-            String consultaSQL = "DELETE FROM estudiantes WHERE Est_Codigo='" + est.getCodigoEst() + "';";
-            int resEstudiante = statement.executeUpdate(consultaSQL);
-            
-            // Eliminar la persona correspondiente de la tabla personas
-            String consultaSQLPersona = "DELETE FROM personas WHERE Per_Id=" + perId + ";";
-            int resPersona = statement.executeUpdate(consultaSQLPersona);
-            
-            if (resEstudiante > 0 && resPersona > 0) {
-                System.out.println("Estudiante eliminado exitosamente");
+        try {
+            // Obtener el Per_Id del estudiante a eliminar
+            String consultaIdPersona = "SELECT Per_Id FROM estudiantes WHERE Est_Codigo='" + est.getCodigoEst() + "';";
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet rs = statement.executeQuery(consultaIdPersona);
+
+            if (rs.next()) {
+                int perId = rs.getInt("Per_Id");
+
+                // Eliminar el estudiante de la tabla estudiantes
+                String consultaSQL = "DELETE FROM estudiantes WHERE Est_Codigo='" + est.getCodigoEst() + "';";
+                int resEstudiante = statement.executeUpdate(consultaSQL);
+
+                // Eliminar la persona correspondiente de la tabla personas
+                String consultaSQLPersona = "DELETE FROM personas WHERE Per_Id=" + perId + ";";
+                int resPersona = statement.executeUpdate(consultaSQLPersona);
+
+                if (resEstudiante > 0 && resPersona > 0) {
+                    System.out.println("Estudiante eliminado exitosamente");
+                } else {
+                    System.out.println("No se pudo eliminar al estudiante");
+                }
             } else {
-                System.out.println("No se pudo eliminar al estudiante");
+                System.out.println("El estudiante no existe");
             }
-        } else {
-            System.out.println("El estudiante no existe");
+
+            // Cerrar recursos
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        
-        // Cerrar recursos
-        rs.close();
-        statement.close();
-    } catch (SQLException e) {
-        System.out.println("Error: " + e.getMessage());
     }
-}
-    
-    
-    
+
     public int verificarRolAdministrador(int idPersona) {
 
         try {

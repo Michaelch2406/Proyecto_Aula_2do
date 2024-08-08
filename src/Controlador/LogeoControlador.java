@@ -32,8 +32,14 @@ public class LogeoControlador {
         boolean cedulaValida = false;
 
         do {
+            System.out.println("Presione '0' si desea regresar al menú principal");
             System.out.println("Ingrese Cédula:");
             cedula = es.nextLine();
+
+            if (cedula.equals("0")) {
+                System.out.println("Regresando al menú principal...");
+                return; // Regresa al menú principal
+            }
 
             if (verificarCedula(cedula)) {
                 cedulaValida = true;
@@ -165,7 +171,7 @@ public class LogeoControlador {
         String carrera11 = "TECNOLOGÍA SUPERIOR EN BIOTECNOLOGÍA";
         String carrera12 = "TECNOLOGÍA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
         // Selección de carrera
-        
+
         System.out.println("Seleccione su carrera:");
         System.out.println("1. " + carrera1);
         System.out.println("2. " + carrera2);
@@ -226,7 +232,6 @@ public class LogeoControlador {
             System.out.println("3. Tercero");
             System.out.println("4. Cuarto");
             System.out.println("5. Quinto");
-
 
             nivel = es.nextInt();
             es.nextLine(); // Consumir el salto de línea residual

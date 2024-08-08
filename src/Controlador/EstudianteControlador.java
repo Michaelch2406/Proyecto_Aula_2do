@@ -173,7 +173,7 @@ public class EstudianteControlador {
         try { //Exception que lanza la consulta
             //String estático -> dinámicos que son los gets
 
-            String consultaSQL = "UPDATE solicitudes SET Sol_Asunto='" + asunto + "', Sol_Detalle='"+detalleSol+"' WHERE Sol_Codigo='" + codigoSol + "';";
+            String consultaSQL = "UPDATE solicitudes SET Sol_Asunto='" + asunto + "', Sol_Detalle='" + detalleSol + "' WHERE Sol_Codigo='" + codigoSol + "';";
             //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
             ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
             //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA

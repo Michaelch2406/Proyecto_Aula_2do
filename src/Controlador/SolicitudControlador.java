@@ -6,6 +6,7 @@ package Controlador;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -52,8 +53,9 @@ public class SolicitudControlador {
             System.out.println("Comuníquese con el Administrador, gracias!!:" + e);
         } //Captura el error y permite que la consola se siga ejecutando
     }
+
     public void crearSolicitud(Scanner es, int logeado) {
-        LogeoControlador lc=new LogeoControlador();
+        LogeoControlador lc = new LogeoControlador();
         lc.limpiarPantalla();
         Solicitud s = new Solicitud();
         SolicitudControlador so = new SolicitudControlador();
@@ -105,7 +107,79 @@ public class SolicitudControlador {
 
         so.crearSolicitud(s);
     }
-    
+
+    public void revisarSolEst() {
+        try {
+            // Consulta SQL que une las tablas solicitudes y personas
+            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Detalle, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
+
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet resultado = statement.executeQuery(consultaSQL);
+
+            // Iterar sobre los resultados y mostrar los datos deseados
+            while (resultado.next()) {
+                String solCodigo = resultado.getString("Sol_Codigo");
+                String solAsunto = resultado.getString("Sol_Asunto");
+                String solDetalle = resultado.getString("Sol_Detalle");
+                String solFecha = resultado.getString("Sol_Fecha");
+                String solEstado = resultado.getString("Sol_Estado");
+                String nombre = resultado.getString("Per_Nombre");
+                String apellido = resultado.getString("Per_Apellido");
+
+                // Mostrar la información incluyendo nombre y apellido
+                System.out.println("--------------REVISIÓN--------------");
+                System.out.println("Código de Solicitud: " + solCodigo);
+                System.out.println("Asunto: " + solAsunto);
+                System.out.println("Detalle: " + solDetalle);
+                System.out.println("Fecha: " + solFecha);
+                System.out.println("Estado: " + solEstado);
+                System.out.println("Nombre: " + nombre + " " + apellido);
+                System.out.println("------------------------------------");
+            }
+
+            resultado.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Error en la revisión de las solicitudes: " + e.getMessage());
+        }
+    }
+
+    public void consultarSolEst() {
+        try {
+            // Consulta SQL que une las tablas solicitudes y personas
+            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Detalle, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
+
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet resultado = statement.executeQuery(consultaSQL);
+
+            // Iterar sobre los resultados y mostrar los datos deseados
+            while (resultado.next()) {
+                String solCodigo = resultado.getString("Sol_Codigo");
+                String solAsunto = resultado.getString("Sol_Asunto");
+                String solDetalle = resultado.getString("Sol_Detalle");
+                String solFecha = resultado.getString("Sol_Fecha");
+                String solEstado = resultado.getString("Sol_Estado");
+                String nombre = resultado.getString("Per_Nombre");
+                String apellido = resultado.getString("Per_Apellido");
+
+                // Mostrar la información incluyendo nombre y apellido
+                System.out.println("--------------CONSULTA--------------");
+                System.out.println("Código de Solicitud: " + solCodigo);
+                System.out.println("Asunto: " + solAsunto);
+                System.out.println("Detalle: " + solDetalle);
+                System.out.println("Fecha: " + solFecha);
+                System.out.println("Fecha: " + solEstado);
+                System.out.println("Nombre: " + nombre + " " + apellido);
+                System.out.println("------------------------------------");
+            }
+
+            resultado.close();
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Error al consultar las solicitudes: " + e.getMessage());
+        }
+    }
+
     public void consultarSolicitudesMain(int logeado) {
         SolicitudControlador soc = new SolicitudControlador();
         ArrayList<Solicitud> listaSolicitudes = soc.consultarSolicitudes(logeado);
@@ -141,7 +215,7 @@ public class SolicitudControlador {
 // Usamos StringBuilder para construir la cadena de resultados
 
         try {
-            String consultaSQL = "SELECT * FROM solicitudes WHERE Sol_Estado='Pendiente' AND Per_Id="+ idPersona + ";";
+            String consultaSQL = "SELECT * FROM solicitudes WHERE Sol_Estado='Pendiente' AND Per_Id=" + idPersona + ";";
             ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
 
             resultado = ejecutar.executeQuery();
@@ -176,27 +250,18 @@ public class SolicitudControlador {
     }
 
     public void revisarSolicitudesMain(Scanner es) {
-        Solicitud so = new Solicitud();
-        SolicitudControlador scr = new SolicitudControlador();
-        ArrayList<Solicitud> listaSolicitudes = scr.revisarSolicitud();
+        SolicitudControlador sc = new SolicitudControlador();
 
-        // Verificar si hay solicitudes pendientes
-        if (listaSolicitudes.isEmpty()) {
-            System.out.println("No hay solicitudes pendientes.");
-            return;
-        }
+        // Mostrar la información detallada de todas las solicitudes incluyendo nombre y apellido del estudiante
+        revisarSolEst();
 
-        // Mostrar todas las solicitudes pendientes
-        for (Solicitud solicitud : listaSolicitudes) {
-            System.out.println(solicitud.revisarSol());
-        }
-
-        // Solicitar al usuario que seleccione el código de la solicitud
+        // Solicitar al usuario que seleccione el código de la solicitud que desea actualizar
         System.out.println("Seleccione el código de la solicitud que desea actualizar:");
         String seleccion = es.nextLine();
 
         // Buscar la solicitud seleccionada
         Solicitud solicitudSeleccionada = null;
+        ArrayList<Solicitud> listaSolicitudes = sc.revisarSolicitud();
         for (Solicitud solicitud : listaSolicitudes) {
             if (solicitud.getCodigoSol().equals(seleccion)) {
                 solicitudSeleccionada = solicitud;
@@ -236,7 +301,7 @@ public class SolicitudControlador {
         }
 
         solicitudSeleccionada.setEstado(estado);
-        scr.actualizarSolicitud(solicitudSeleccionada);
+        sc.actualizarSolicitud(solicitudSeleccionada);
 
         if (estado.equals("Aprobado") || estado.equals("Aceptado")) {
             Turno t = new Turno();
