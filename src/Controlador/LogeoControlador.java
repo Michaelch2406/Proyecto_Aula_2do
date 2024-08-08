@@ -152,18 +152,18 @@ public class LogeoControlador {
         Estudiante est = new Estudiante();
         System.out.println("Ingrese el código de estudiante");
 
-        String carrera1 = "TECNOLOGIA SUPERIOR EN DESARROLLO DE SOFTWARE";
-        String carrera2 = "TECNOLOGIA SUPERIOR EN REDES Y TELECOMUNICACIONES";
-        String carrera3 = "TECNOLOGIA SUPERIOR EN ELECTRONICA";
-        String carrera4 = "TECNOLOGIA SUPERIOR EN AUTOMATIZACION E INSTRUMENTACION";
-        String carrera5 = "TECNOLOGIA SUPERIOR EN ELECTRICIDAD";
-        String carrera6 = "TECNOLOGIA SUPERIOR EN MECANICA INDUSTRIAL";
-        String carrera7 = "TECNOLOGIA SUPERIOR EN MECANICA AUTOMOTRIZ";
-        String carrera8 = "TECNOLOGIA SUPERIOR EN ENTRENAMIENTO DEPORTIVO";
-        String carrera9 = "TECNOLOGIA SUPERIOR EN PROCESAMIENTO DE ALIMENTOS";
-        String carrera10 = "TECNOLOGIA SUPERIOR EN QUIMICA";
-        String carrera11 = "TECNOLOGIA SUPERIOR EN BIOTECNOLOGIA";
-        String carrera12 = "TECNOLOGIA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
+        String carrera1 = "TECNOLOGÍA SUPERIOR EN DESARROLLO DE SOFTWARE";
+        String carrera2 = "TECNOLOGÍA SUPERIOR EN REDES Y TELECOMUNICACIONES";
+        String carrera3 = "TECNOLOGÍA SUPERIOR EN ELECTRONICA";
+        String carrera4 = "TECNOLOGÍA SUPERIOR EN AUTOMATIZACIÓN E INSTRUMENTACIÓN";
+        String carrera5 = "TECNOLOGÍA SUPERIOR EN ELECTRICIDAD";
+        String carrera6 = "TECNOLOGÍA SUPERIOR EN MECÁNICA INDUSTRIAL";
+        String carrera7 = "TECNOLOGÍA SUPERIOR EN MECÁNICA AUTOMOTRIZ";
+        String carrera8 = "TECNOLOGÍA SUPERIOR EN ENTRENAMIENTO DEPORTIVO";
+        String carrera9 = "TECNOLOGÍA SUPERIOR EN PROCESAMIENTO DE ALIMENTOS";
+        String carrera10 = "TECNOLOGÍA SUPERIOR EN QUÍMICA";
+        String carrera11 = "TECNOLOGÍA SUPERIOR EN BIOTECNOLOGÍA";
+        String carrera12 = "TECNOLOGÍA SUPERIOR EN CONTROL DE INCENDIOS Y OPERACIONES DE RESCATE";
         // Selección de carrera
         
         System.out.println("Seleccione su carrera:");
