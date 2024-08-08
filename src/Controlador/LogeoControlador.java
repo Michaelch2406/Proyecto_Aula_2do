@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 import modelo.Estudiante;
 import modelo.Persona;
 import modelo.Secretaria;
-import vista.Main2;
-import static vista.Main2.menuEstudiante;
-import static vista.Main2.menuSecretaria;
-import static vista.Main2.menuAdministrador;
+import vista.Main;
+import static vista.Main.menuEstudiante;
+import static vista.Main.menuSecretaria;
+import static vista.Main.menuAdministrador;
 
 /**
  *

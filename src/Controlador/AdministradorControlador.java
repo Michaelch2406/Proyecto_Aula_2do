@@ -164,9 +164,9 @@ public class AdministradorControlador {
             int resPersona = statement.executeUpdate(consultaSQLPersona);
             
             if (resEstudiante > 0 && resPersona > 0) {
-                System.out.println("Estudiante y persona eliminados exitosamente");
+                System.out.println("Estudiante eliminado exitosamente");
             } else {
-                System.out.println("No se pudo eliminar el estudiante o la persona");
+                System.out.println("No se pudo eliminar al estudiante");
             }
         } else {
             System.out.println("El estudiante no existe");
@@ -179,6 +179,8 @@ public class AdministradorControlador {
         System.out.println("Error: " + e.getMessage());
     }
 }
+    
+    
     
     public int verificarRolAdministrador(int idPersona) {
 
