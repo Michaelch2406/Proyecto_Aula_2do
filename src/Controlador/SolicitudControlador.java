@@ -59,7 +59,7 @@ public class SolicitudControlador {
         lc.limpiarPantalla();
         Solicitud s = new Solicitud();
         SolicitudControlador so = new SolicitudControlador();
-        Funciones f=new Funciones();
+        Funciones f = new Funciones();
         s.setIdPersona(logeado);
         es.nextLine();
         System.out.println("Ingrese los datos para la solicitud");
@@ -69,6 +69,7 @@ public class SolicitudControlador {
         s.setCodigoSol(codigoSolicitud);
 
         String asunto = "";
+        String detalle = "";
         boolean asuntoValido = false;
 
         while (!asuntoValido) {
@@ -84,14 +85,92 @@ public class SolicitudControlador {
                 case 1 -> {
                     asunto = "Certificado de Notas";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Notas
+                    System.out.println("Elija la razón para el Certificado de Notas:");
+                    System.out.println("1. Para presentar en otra institución");
+                    System.out.println("2. Para beca");
+                    System.out.println("3. Para archivo personal");
+                    System.out.println("4. Para postulación a maestría");
+                    System.out.println("5. Para homologación de estudios en el extranjero");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            detalle = "Para presentar en otra institución";
+                        case 2 ->
+                            detalle = "Para beca";
+                        case 3 ->
+                            detalle = "Para archivo personal";
+                        case 4 ->
+                            detalle = "Para postulación a maestría";
+                        case 5 ->
+                            detalle = "Para homologación de estudios en el extranjero";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 case 2 -> {
                     asunto = "Certificado de Asistencia";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Asistencia
+                    System.out.println("Elija la razón para el Certificado de Asistencia:");
+                    System.out.println("1. Requisito de trabajo");
+                    System.out.println("2. Para justificación académica");
+                    System.out.println("3. Para historial académico");
+                    System.out.println("4. Para transferencia de crédito a otra universidad");
+                    System.out.println("5. Para certificación en programas de apoyo estudiantil");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            detalle = "Requisito de trabajo";
+                        case 2 ->
+                            detalle = "Para justificación académica";
+                        case 3 ->
+                            detalle = "Para historial académico";
+                        case 4 ->
+                            detalle = "Para transferencia de crédito a otra universidad";
+                        case 5 ->
+                            detalle = "Para certificación en programas de apoyo estudiantil";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 case 3 -> {
                     asunto = "Certificado de Matrícula";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Matrícula
+                    System.out.println("Elija la razón para el Certificado de Matrícula:");
+                    System.out.println("1. Requisito de crédito estudiantil");
+                    System.out.println("2. Para seguro médico");
+                    System.out.println("3. Para migración");
+                    System.out.println("4. Para inscripción en actividades extracurriculares");
+                    System.out.println("5. Para revalidación de matrícula en otra institución");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            detalle = "Requisito de crédito estudiantil";
+                        case 2 ->
+                            detalle = "Para seguro médico";
+                        case 3 ->
+                            detalle = "Para migración";
+                        case 4 ->
+                            detalle = "Para inscripción en actividades extracurriculares";
+                        case 5 ->
+                            detalle = "Para revalidación de matrícula en otra institución";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, seleccione un número entre 1 y 3.");
@@ -99,8 +178,7 @@ public class SolicitudControlador {
         }
 
         s.setAsunto(asunto);
-        System.out.println("Ingrese el Detalle de la solicitud: ");
-        s.setDetalle(es.nextLine());
+        s.setDetalle(detalle);
         s.setEstado("Pendiente");
 
         so.crearSolicitud(s);
@@ -303,7 +381,7 @@ public class SolicitudControlador {
 
         if (estado.equals("Aprobado") || estado.equals("Aceptado")) {
             Turno t = new Turno();
-            Funciones f=new Funciones();
+            Funciones f = new Funciones();
             f.fechaTurno();
             f.horaTurno();
             t.setRetiro("Ir a retirar");

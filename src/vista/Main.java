@@ -43,7 +43,6 @@ public class Main {
                     + "2. Registrarse como Estudiante\n"
                     + "0. Salir");
             int mainOption = lc.leerOpcion(es);
-            es.nextLine(); // Consumir el salto de línea residual
 
             switch (mainOption) {// 1
                 case 1 ->
@@ -71,13 +70,12 @@ public class Main {
             System.out.println("              MENÚ ESTUDIANTE");
             System.out.println("""
                                Elija la opción que necesite:
-                               1. Crear Solicitud //EN PROCESO CREAR UN DETALLE PREDETERMINADO PARA CADA TIPO DE CERTIFICADO
+                               1. Crear Solicitud
                                2. Consultar Solicitud
                                3. Editar Solicitud
                                4. Consultar Turno //EN PROCESO FALTA DIA DE RETIRO, Y QUE SE ACTUALICE CUANDO VAYA A RETIRAR COMO RETIRADO
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
-            es.nextLine(); // Consumir el salto de línea residual
             EstudianteControlador estC = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
             TurnoControlador tc = new TurnoControlador();
@@ -121,17 +119,18 @@ public class Main {
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                3. Consultar Solicitudes 
-                               3. Actualizar Turno //CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
+                               4. Actualizar Turno //CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
-            es.nextLine(); // Consumir el salto de línea residual
-
+            
             switch (op1) {
                 case 1 ->
                     ec.consultarEstudiantesMain();
                 case 2 ->
                     sc.revisarSolicitudesMain(es);
                 case 3 ->
+                    sc.consultarSolEst();
+                case 4 ->
                     sc.consultarSolEst();
                 case 0 -> {
                     i = 0;
@@ -165,7 +164,6 @@ public class Main {
                                7. Revisar solicitudes //EN PROCESO...
                                0. Salir""");
             int op1 = lg.leerOpcion(es);
-            es.nextLine(); // Consumir el salto de línea residual
 
             switch (op1) {
                 case 1 ->
