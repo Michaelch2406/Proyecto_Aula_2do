@@ -127,7 +127,7 @@ public class LogeoControlador {
                 cedulaValida = true;
                 pe.setCedula(cedula);
             } else {
-                System.out.println("Cédula inválida. La cédula debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+                System.out.println("Cédula inválida. Por favor, intente nuevamente.");
             }
         } while (!cedulaValida);
 
@@ -141,7 +141,7 @@ public class LogeoControlador {
                 telefonoValido = true;
                 pe.setTelefono(telefono);
             } else {
-                System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+                System.out.println("Teléfono inválido. Por favor, intente nuevamente.");
             }
         } while (!telefonoValido);
         do {
@@ -156,7 +156,7 @@ public class LogeoControlador {
                 pe.setCorreo(correo);
                 break;
             } else {
-                System.out.println("Correo inválido. El correo debe contener un '@'. Por favor, intente nuevamente.");
+                System.out.println("Correo inválido. Por favor, intente nuevamente.");
             }
         } while (true);
 
@@ -266,7 +266,6 @@ public class LogeoControlador {
 
     public void registrarSecretaria(Scanner es) {
         limpiarPantalla();
-        LogeoControlador lc = new LogeoControlador();
         boolean cedulaValida = false;
         boolean telefonoValido = false;
         System.out.println("Ingrese los siguientes datos para registrarse como secretaria...");
@@ -280,11 +279,11 @@ public class LogeoControlador {
             System.out.println("Ingrese el número de cédula: ");
             String cedula = es.nextLine();
 
-            if (lc.verificarCedula(cedula)) {
+            if (verificarCedula(cedula)) {
                 cedulaValida = true;
                 pe.setCedula(cedula);
             } else {
-                System.out.println("Cédula inválida. La cédula debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+                System.out.println("Cédula inválida. Por favor, intente nuevamente.");
             }
         } while (!cedulaValida);
 
@@ -294,11 +293,11 @@ public class LogeoControlador {
             System.out.println("Ingrese su teléfono: ");
             String telefono = es.nextLine();
 
-            if (lc.verificarTelefono(telefono)) {
+            if (verificarTelefono(telefono)) {
                 telefonoValido = true;
                 pe.setTelefono(telefono);
             } else {
-                System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
+                System.out.println("Teléfono inválido. Por favor, intente nuevamente.");
             }
         } while (!telefonoValido);
         do {
@@ -313,7 +312,7 @@ public class LogeoControlador {
                 pe.setCorreo(correo);
                 break;
             } else {
-                System.out.println("Correo inválido. El correo debe contener un '@'. Por favor, intente nuevamente.");
+                System.out.println("Correo inválido. Por favor, intente nuevamente.");
             }
         } while (true);
         System.out.println("Ingrese su Dirección: ");
@@ -355,46 +354,23 @@ public class LogeoControlador {
     }
 
     public int leerOpcion(Scanner es) {
-        int opcion = -1;
-        boolean entradaValida = false;
-
-        do {
+        System.out.print("Seleccione una opción: ");
+        while (!es.hasNextInt()) {
+            System.out.println("Opción no válida. Por favor, intente nuevamente.");
+            es.next();  // Descarta la entrada incorrecta
             System.out.print("Seleccione una opción: ");
-            if (es.hasNextInt()) {  // Verifica si la entrada es un número entero
-                opcion = es.nextInt();
-                entradaValida = true;  // Si es un número entero, la entrada es válida
-            } else {
-                System.out.println("Opción no válida. Por favor, intente nuevamente.");
-                es.next();  // Descarta la entrada incorrecta
-            }
-            es.nextLine();  // Consumir el salto de línea residual
-        } while (!entradaValida);  // Repite hasta que la entrada sea válida
-
+        }
+        int opcion = es.nextInt();
+        es.nextLine();  // Consumir el salto de línea residual
         return opcion;
     }
 
     public boolean verificarCedula(String cedula) {
-        // Expresión regular para encontrar exactamente 10 dígitos
-        String regex = "\\b\\d{10}\\b";
-
-        // Compilar la expresión regular
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(cedula);
-
-        // Verificar si la cédula coincide con la expresión regular
-        return matcher.matches();
+        return cedula.matches("\\d{10}");
     }
 
     public boolean verificarTelefono(String telefono) {
-        // Expresión regular para encontrar exactamente 10 dígitos
-        String regex = "^09\\d{8}$";
-
-        // Compilar la expresión regular
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(telefono);
-
-        // Verificar si coincide
-        return matcher.matches();
+        return telefono.matches("09\\d{8}");
     }
 
     private void pause(Scanner es) {

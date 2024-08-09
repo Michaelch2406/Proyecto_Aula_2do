@@ -116,7 +116,7 @@ public class TurnoControlador {
                 t.setRetiro(resultado.getString("Tur_Retiro"));
                 s.setCodigoSol(resultado.getString("Sol_Codigo"));
                 s.setAsunto(resultado.getString("Sol_Asunto"));
-                s.setDetalle(resultado.getString("Sol_Detalle"));
+                s.setRazon(resultado.getString("Sol_Razon"));
 
                 listaTurno.add(t);
             }
@@ -127,6 +127,11 @@ public class TurnoControlador {
             System.out.println("Por favor, comuníquese con el administrador" + e);
         }
         return listaTurno;
+    }
+    public void actualizarT(Scanner s){
+        Scanner es = new Scanner(System.in);
+        System.out.println("Ingrese el código del turno que desea actualizar:\n");
+        String codigoTur = es.nextLine();
     }
 
     

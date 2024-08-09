@@ -14,7 +14,7 @@ public class Solicitud{
     private String codigoSol;
     private String fecha;
     private String asunto;
-    private String detalle;
+    private String razon;
     private String estado;
     private int idPersona;
     
@@ -22,17 +22,15 @@ public class Solicitud{
     public Solicitud() {
     }
 
-    public Solicitud(int idSolicitud, String codigoSol, String fecha, String asunto, String detalle, String estado, int idPersona) {
+    public Solicitud(int idSolicitud, String codigoSol, String fecha, String asunto, String razon, String estado, int idPersona) {
         this.idSolicitud = idSolicitud;
         this.codigoSol = codigoSol;
         this.fecha = fecha;
         this.asunto = asunto;
-        this.detalle = detalle;
+        this.razon = razon;
         this.estado = estado;
         this.idPersona = idPersona;
     }
-
-
 
     public int getIdSolicitud() {
         return idSolicitud;
@@ -66,13 +64,14 @@ public class Solicitud{
         this.asunto = asunto;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public String getRazon() {
+        return razon;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setRazon(String razon) {
+        this.razon = razon;
     }
+
 
     public String getEstado() {
         return estado;
@@ -96,7 +95,7 @@ public class Solicitud{
                 "Código: " + getCodigoSol()+ "\n" + 
                 "Fecha: " + getFecha()+ "\n" + 
                 "Asunto: "+ getAsunto()+ "\n" + 
-                "Detalle: "+ getDetalle()+ "\n" + 
+                "Detalle: "+ getRazon()+ "\n" + 
                 "Estado: "+ getEstado()+ "\n"; 
     }
     public String revisarSol(){
@@ -104,14 +103,14 @@ public class Solicitud{
                 "Fecha: " + getFecha()+ "\n" + 
                 "Código: " + getCodigoSol()+ "\n" + 
                 "Asunto: "+ getAsunto()+ "\n" + 
-                "Detalle: "+ getDetalle()+ "\n" + 
+                "Detalle: "+ getRazon()+ "\n" + 
                 "Estado: "+ getEstado()+ "\n"; 
     }
     public String editarsolicitud(){
         return "*----------- EDITAR -------------*" + "\n" + 
                 "Fecha: " + getFecha()+ "\n" + 
                 "Asunto: "+ getAsunto()+ "\n" + 
-                "Detalle: "+ getDetalle(); 
+                "Detalle: "+ getRazon(); 
     }
     
 }

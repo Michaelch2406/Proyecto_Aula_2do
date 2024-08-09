@@ -80,7 +80,7 @@ public class Turno{
     public String consultarTurnoEst(){
         return "*----------- CONSULTA TURNO -------------*" + "\n" + 
                 "Codigo: " + getCodigo()+ "\n" + 
-                "Fecha de retiro: " + getFecha()+ "\n" + 
+                "Fecha de retiro: O APROBACIÓN?" + getFecha()+ "\n" + 
                 "Hora de retiro: "+ getHora()+ "\n" + 
                 "Retiro: "+ getRetiro(); 
     }

@@ -35,7 +35,7 @@ public class Main {
 
         do {
             lc.limpiarPantalla();
-            System.out.println("ʕ•́ᴥ•̀ʔっ");
+            
 
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
@@ -111,6 +111,7 @@ public class Main {
             LogeoControlador lc = new LogeoControlador();
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
+            TurnoControlador tc=new TurnoControlador();
             lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
             System.out.println("              MENÚ SECRETARIA");
@@ -119,7 +120,7 @@ public class Main {
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                3. Consultar Solicitudes 
-                               4. Actualizar Turno //CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
+                               4. Actualizar Turno //EN PROCESO... CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             
@@ -131,7 +132,8 @@ public class Main {
                 case 3 ->
                     sc.consultarSolEst();
                 case 4 ->
-                    sc.consultarSolEst();
+                    tc.consultarTurnoMain(logeado);
+                    //FALTA ACTUALIZAR TURNO A RETIRADO
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");

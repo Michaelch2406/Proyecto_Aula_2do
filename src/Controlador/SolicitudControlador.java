@@ -36,7 +36,7 @@ public class SolicitudControlador {
         try { //Exception que lanza la consulta
             //String estático -> dinámicos que son los gets
 
-            String consultaSQL = "INSERT INTO solicitudes(Sol_Fecha,Sol_Codigo,Sol_Asunto,Sol_Detalle,Sol_Estado,Per_Id) VALUES ('" + s.getFecha() + "','" + s.getCodigoSol() + "','" + s.getAsunto() + "','" + s.getDetalle() + "','" + s.getEstado() + "','" + s.getIdPersona() + "');";
+            String consultaSQL = "INSERT INTO solicitudes(Sol_Fecha,Sol_Codigo,Sol_Asunto,Sol_Razon,Sol_Estado,Per_Id) VALUES ('" + s.getFecha() + "','" + s.getCodigoSol() + "','" + s.getAsunto() + "','" + s.getRazon() + "','" + s.getEstado() + "','" + s.getIdPersona() + "');";
             //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
             ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
             //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA
@@ -59,11 +59,9 @@ public class SolicitudControlador {
         lc.limpiarPantalla();
         Solicitud s = new Solicitud();
         SolicitudControlador so = new SolicitudControlador();
-        Funciones f = new Funciones();
+        Fechas f = new Fechas();
         s.setIdPersona(logeado);
-        es.nextLine();
         System.out.println("Ingrese los datos para la solicitud");
-        es.nextLine();
         f.fechaSol(s);
         String codigoSolicitud = so.generarCodigoSolicitud();
         s.setCodigoSol(codigoSolicitud);
@@ -73,13 +71,12 @@ public class SolicitudControlador {
         boolean asuntoValido = false;
 
         while (!asuntoValido) {
-            System.out.println("Ingrese el Asunto: ");
+            System.out.println("Seleccione el tipo de Certificado que desea solicitar: ");
             System.out.println("1. Certificado de Notas");
             System.out.println("2. Certificado de Asistencia");
             System.out.println("3. Certificado de Matrícula");
 
             int asuntoOpcion = es.nextInt();
-            es.nextLine(); // Consumir el salto de línea residual
 
             switch (asuntoOpcion) {
                 case 1 -> {
@@ -87,27 +84,26 @@ public class SolicitudControlador {
                     asuntoValido = true;
 
                     // Mini menú para Certificado de Notas
-                    System.out.println("Elija la razón para el Certificado de Notas:");
-                    System.out.println("1. Para presentar en otra institución");
-                    System.out.println("2. Para beca");
-                    System.out.println("3. Para archivo personal");
-                    System.out.println("4. Para postulación a maestría");
-                    System.out.println("5. Para homologación de estudios en el extranjero");
+                    System.out.println("Elija el motivo para la emisión del Certificado de Notas:");
+                    System.out.println("1. Presentación en otra institución educativa");
+                    System.out.println("2. Aplicación a beca");
+                    System.out.println("3. Respaldo personal");
+                    System.out.println("4. Postulación a estudios de posgrado");
+                    System.out.println("5. Reconocimiento de estudios en el extranjero");
 
                     int razonOpcion = es.nextInt();
-                    es.nextLine(); // Consumir el salto de línea residual
 
                     switch (razonOpcion) {
                         case 1 ->
-                            detalle = "Para presentar en otra institución";
+                            detalle = "Presentación en otra institución educativa";
                         case 2 ->
-                            detalle = "Para beca";
+                            detalle = "Aplicación a beca";
                         case 3 ->
-                            detalle = "Para archivo personal";
+                            detalle = "Respaldo personal";
                         case 4 ->
-                            detalle = "Para postulación a maestría";
+                            detalle = "Postulación a estudios de posgrado";
                         case 5 ->
-                            detalle = "Para homologación de estudios en el extranjero";
+                            detalle = "Reconocimiento de estudios en el extranjero";
                         default ->
                             System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
                     }
@@ -117,27 +113,26 @@ public class SolicitudControlador {
                     asuntoValido = true;
 
                     // Mini menú para Certificado de Asistencia
-                    System.out.println("Elija la razón para el Certificado de Asistencia:");
-                    System.out.println("1. Requisito de trabajo");
-                    System.out.println("2. Para justificación académica");
-                    System.out.println("3. Para historial académico");
-                    System.out.println("4. Para transferencia de crédito a otra universidad");
-                    System.out.println("5. Para certificación en programas de apoyo estudiantil");
+                    System.out.println("Elija el motivo para la emisión del Certificado de Asistencia:");
+                    System.out.println("1. Requisito para empleo");
+                    System.out.println("2. Justificación ante instituciones académicas");
+                    System.out.println("3. Respaldo histórico de asistencia");
+                    System.out.println("4. Transferencia de créditos académicos a otra universidad");
+                    System.out.println("5. Participación en programas de apoyo institucional");
 
                     int razonOpcion = es.nextInt();
-                    es.nextLine(); // Consumir el salto de línea residual
 
                     switch (razonOpcion) {
                         case 1 ->
-                            detalle = "Requisito de trabajo";
+                            detalle = "Requisito para empleo";
                         case 2 ->
-                            detalle = "Para justificación académica";
+                            detalle = "Justificación ante instituciones académicas";
                         case 3 ->
-                            detalle = "Para historial académico";
+                            detalle = "Respaldo histórico de asistencia";
                         case 4 ->
-                            detalle = "Para transferencia de crédito a otra universidad";
+                            detalle = "Transferencia de créditos académicos a otra universidad";
                         case 5 ->
-                            detalle = "Para certificación en programas de apoyo estudiantil";
+                            detalle = "Participación en programas de apoyo institucional";
                         default ->
                             System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
                     }
@@ -147,27 +142,26 @@ public class SolicitudControlador {
                     asuntoValido = true;
 
                     // Mini menú para Certificado de Matrícula
-                    System.out.println("Elija la razón para el Certificado de Matrícula:");
-                    System.out.println("1. Requisito de crédito estudiantil");
-                    System.out.println("2. Para seguro médico");
-                    System.out.println("3. Para migración");
-                    System.out.println("4. Para inscripción en actividades extracurriculares");
-                    System.out.println("5. Para revalidación de matrícula en otra institución");
+                    System.out.println("Elija el motivo para la emisión del Certificado de Matrícula:");
+                    System.out.println("1. Requisito para solicitud de crédito estudiantil");
+                    System.out.println("2. Requisito para seguro médico");
+                    System.out.println("3. Trámites migratorios");
+                    System.out.println("4. Inscripción en actividades extracurriculares");
+                    System.out.println("5. Revalidación de matrícula en otra institución educativa");
 
                     int razonOpcion = es.nextInt();
-                    es.nextLine(); // Consumir el salto de línea residual
 
                     switch (razonOpcion) {
                         case 1 ->
-                            detalle = "Requisito de crédito estudiantil";
+                            detalle = "Requisito para solicitud de crédito estudiantil";
                         case 2 ->
-                            detalle = "Para seguro médico";
+                            detalle = "Requisito para seguro médico";
                         case 3 ->
-                            detalle = "Para migración";
+                            detalle = "Trámites migratorios";
                         case 4 ->
-                            detalle = "Para inscripción en actividades extracurriculares";
+                            detalle = "Inscripción en actividades extracurriculares";
                         case 5 ->
-                            detalle = "Para revalidación de matrícula en otra institución";
+                            detalle = "Revalidación de matrícula en otra institución educativa";
                         default ->
                             System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
                     }
@@ -178,7 +172,7 @@ public class SolicitudControlador {
         }
 
         s.setAsunto(asunto);
-        s.setDetalle(detalle);
+        s.setRazon(detalle);
         s.setEstado("Pendiente");
 
         so.crearSolicitud(s);
@@ -187,7 +181,7 @@ public class SolicitudControlador {
     public void revisarSolEst() {
         try {
             // Consulta SQL que une las tablas solicitudes y personas
-            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Detalle, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
+            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Razon, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
 
             Statement statement = (Statement) connection.createStatement();
             ResultSet resultado = statement.executeQuery(consultaSQL);
@@ -196,7 +190,7 @@ public class SolicitudControlador {
             while (resultado.next()) {
                 String solCodigo = resultado.getString("Sol_Codigo");
                 String solAsunto = resultado.getString("Sol_Asunto");
-                String solDetalle = resultado.getString("Sol_Detalle");
+                String solRazon = resultado.getString("Sol_Razon");
                 String solFecha = resultado.getString("Sol_Fecha");
                 String solEstado = resultado.getString("Sol_Estado");
                 String nombre = resultado.getString("Per_Nombre");
@@ -206,7 +200,7 @@ public class SolicitudControlador {
                 System.out.println("--------------REVISIÓN--------------");
                 System.out.println("Código de Solicitud: " + solCodigo);
                 System.out.println("Asunto: " + solAsunto);
-                System.out.println("Detalle: " + solDetalle);
+                System.out.println("Detalle: " + solRazon);
                 System.out.println("Fecha: " + solFecha);
                 System.out.println("Estado: " + solEstado);
                 System.out.println("Nombre: " + nombre + " " + apellido);
@@ -223,7 +217,7 @@ public class SolicitudControlador {
     public void consultarSolEst() {
         try {
             // Consulta SQL que une las tablas solicitudes y personas
-            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Detalle, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
+            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Razon, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
 
             Statement statement = (Statement) connection.createStatement();
             ResultSet resultado = statement.executeQuery(consultaSQL);
@@ -232,7 +226,7 @@ public class SolicitudControlador {
             while (resultado.next()) {
                 String solCodigo = resultado.getString("Sol_Codigo");
                 String solAsunto = resultado.getString("Sol_Asunto");
-                String solDetalle = resultado.getString("Sol_Detalle");
+                String solRazon = resultado.getString("Sol_Razon");
                 String solFecha = resultado.getString("Sol_Fecha");
                 String solEstado = resultado.getString("Sol_Estado");
                 String nombre = resultado.getString("Per_Nombre");
@@ -242,7 +236,7 @@ public class SolicitudControlador {
                 System.out.println("--------------CONSULTA--------------");
                 System.out.println("Código de Solicitud: " + solCodigo);
                 System.out.println("Asunto: " + solAsunto);
-                System.out.println("Detalle: " + solDetalle);
+                System.out.println("Detalle: " + solRazon);
                 System.out.println("Fecha: " + solFecha);
                 System.out.println("Fecha: " + solEstado);
                 System.out.println("Nombre: " + nombre + " " + apellido);
@@ -301,7 +295,7 @@ public class SolicitudControlador {
                 s.setCodigoSol(resultado.getString("Sol_Codigo"));
                 s.setFecha(resultado.getString("Sol_Fecha"));
                 s.setAsunto(resultado.getString("Sol_Asunto"));
-                s.setDetalle(resultado.getString("Sol_Detalle"));
+                s.setRazon(resultado.getString("Sol_Razon"));
                 s.setEstado(resultado.getString("Sol_Estado"));
                 listaSolicitudes.add(s);
             }
@@ -381,7 +375,7 @@ public class SolicitudControlador {
 
         if (estado.equals("Aprobado") || estado.equals("Aceptado")) {
             Turno t = new Turno();
-            Funciones f = new Funciones();
+            Fechas f = new Fechas();
             f.fechaTurno();
             f.horaTurno();
             t.setRetiro("Ir a retirar");
@@ -397,7 +391,7 @@ public class SolicitudControlador {
         ResultSet resultSet = null;
 
         try {
-            String consultaSQL = "SELECT Sol_Id, Sol_Codigo, Sol_Fecha, Sol_Asunto, Sol_Detalle, Sol_Estado, Per_Id FROM solicitudes WHERE Sol_Estado = 'Pendiente'";
+            String consultaSQL = "SELECT Sol_Id, Sol_Codigo, Sol_Fecha, Sol_Asunto, Sol_Razon, Sol_Estado, Per_Id FROM solicitudes WHERE Sol_Estado = 'Pendiente'";
             preparedStatement = (PreparedStatement) connection.prepareStatement(consultaSQL);
             resultSet = preparedStatement.executeQuery();
 
@@ -407,7 +401,7 @@ public class SolicitudControlador {
                 s.setCodigoSol(resultSet.getString("Sol_Codigo"));
                 s.setFecha(resultSet.getString("Sol_Fecha"));
                 s.setAsunto(resultSet.getString("Sol_Asunto"));
-                s.setDetalle(resultSet.getString("Sol_Detalle"));
+                s.setRazon(resultSet.getString("Sol_Razon"));
                 s.setEstado(resultSet.getString("Sol_Estado"));
                 s.setIdPersona(resultSet.getInt("Per_Id"));
 

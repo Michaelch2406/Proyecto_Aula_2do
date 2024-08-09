@@ -134,15 +134,18 @@ public class EstudianteControlador {
 
     public void editarSolicitud() {
         Scanner es = new Scanner(System.in);
-        int i = 1;
-
         System.out.println("Ingrese el código de la solicitud que desea editar:\n");
         String codigoSol = es.nextLine();
+        Solicitud s=new Solicitud();
+        Fechas f=new Fechas();
+        
+        f.fechaSol(s);
         String asunto = "";
+        String razon = "";
         boolean asuntoValido = false;
 
         while (!asuntoValido) {
-            System.out.println("Ingrese el nuevo Asunto: ");
+            System.out.println("Seleccione el nuevo Asunto: ");
             System.out.println("1. Certificado de Notas");
             System.out.println("2. Certificado de Asistencia");
             System.out.println("3. Certificado de Matrícula");
@@ -154,26 +157,104 @@ public class EstudianteControlador {
                 case 1 -> {
                     asunto = "Certificado de Notas";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Notas
+                    System.out.println("Elija el motivo nuevo para la emisión del Certificado de Notas:");
+                    System.out.println("1. Presentación en otra institución educativa");
+                    System.out.println("2. Aplicación a beca");
+                    System.out.println("3. Respaldo personal");
+                    System.out.println("4. Postulación a estudios de posgrado");
+                    System.out.println("5. Reconocimiento de estudios en el extranjero");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            razon = "Presentación en otra institución educativa";
+                        case 2 ->
+                            razon = "Aplicación a beca";
+                        case 3 ->
+                            razon = "Respaldo personal";
+                        case 4 ->
+                            razon = "Postulación a estudios de posgrado";
+                        case 5 ->
+                            razon = "Reconocimiento de estudios en el extranjero";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 case 2 -> {
                     asunto = "Certificado de Asistencia";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Asistencia
+                    System.out.println("Elija el motivo nuevo para la emisión del Certificado de Asistencia:");
+                    System.out.println("1. Requisito para empleo");
+                    System.out.println("2. Justificación ante instituciones académicas");
+                    System.out.println("3. Respaldo histórico de asistencia");
+                    System.out.println("4. Transferencia de créditos académicos a otra universidad");
+                    System.out.println("5. Participación en programas de apoyo institucional");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            razon = "Requisito para empleo";
+                        case 2 ->
+                            razon = "Justificación ante instituciones académicas";
+                        case 3 ->
+                            razon = "Respaldo histórico de asistencia";
+                        case 4 ->
+                            razon = "Transferencia de créditos académicos a otra universidad";
+                        case 5 ->
+                            razon = "Participación en programas de apoyo institucional";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 case 3 -> {
                     asunto = "Certificado de Matrícula";
                     asuntoValido = true;
+
+                    // Mini menú para Certificado de Matrícula
+                    System.out.println("Elija el motivo nuevo para la emisión del Certificado de Matrícula:");
+                    System.out.println("1. Requisito para solicitud de crédito estudiantil");
+                    System.out.println("2. Requisito para seguro médico");
+                    System.out.println("3. Trámites migratorios");
+                    System.out.println("4. Inscripción en actividades extracurriculares");
+                    System.out.println("5. Revalidación de matrícula en otra institución educativa");
+
+                    int razonOpcion = es.nextInt();
+                    es.nextLine(); // Consumir el salto de línea residual
+
+                    switch (razonOpcion) {
+                        case 1 ->
+                            razon = "Requisito para solicitud de crédito estudiantil";
+                        case 2 ->
+                            razon = "Requisito para seguro médico";
+                        case 3 ->
+                            razon = "Trámites migratorios";
+                        case 4 ->
+                            razon = "Inscripción en actividades extracurriculares";
+                        case 5 ->
+                            razon = "Revalidación de matrícula en otra institución educativa";
+                        default ->
+                            System.out.println("Opción no válida. Por favor, seleccione una razón válida.");
+                    }
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, seleccione un número entre 1 y 3.");
             }
         }
-        System.out.println("Ingrese el nuevo Detalle de la solicitud: ");
-        String detalleSol = es.nextLine();
 
+
+        // Aquí se debería realizar la lógica para actualizar la solicitud con el nuevo asunto y razon
         try { //Exception que lanza la consulta
             //String estático -> dinámicos que son los gets
 
-            String consultaSQL = "UPDATE solicitudes SET Sol_Asunto='" + asunto + "', Sol_Detalle='" + detalleSol + "' WHERE Sol_Codigo='" + codigoSol + "';";
+            String consultaSQL = "UPDATE solicitudes SET Sol_Asunto='" + asunto + "', Sol_Razon='" + razon + "' WHERE Sol_Codigo='" + codigoSol + "';";
             //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
             ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
             //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA

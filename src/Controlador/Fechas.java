@@ -14,7 +14,7 @@ import modelo.Turno;
  *
  * @author LENOVO
  */
-public class Funciones {
+public class Fechas {
     
     public void fechaSol(Solicitud s){
         Date todayDate = new Date();
