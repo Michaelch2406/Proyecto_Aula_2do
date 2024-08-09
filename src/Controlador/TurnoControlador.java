@@ -9,6 +9,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import modelo.Estudiante;
 import modelo.Solicitud;
 import modelo.Turno;
@@ -126,6 +127,29 @@ public class TurnoControlador {
             System.out.println("Por favor, comuníquese con el administrador" + e);
         }
         return listaTurno;
+    }
+
+    
+    public void actualizarTurno(Turno t) {
+        try { //Exception que lanza la consulta
+            //String estático -> dinámicos que son los gets
+            String consultaSQL = "UPDATE turnos SET Tur_Retiro='" + t.getRetiro()+ "' WHERE Tur_Codigo='" + t.getCodigo()+ "';";
+
+            //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
+            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
+            //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA
+            int res = ejecutar.executeUpdate();
+            if (res > 0) {
+                System.out.println("El turno ha sido actualizado con éxito");
+                ejecutar.close(); //Siempre cierro mi conlsuta
+            } else {
+                System.out.println("Favor ingrese correctamente los datos solicitados: ");
+                ejecutar.close(); //Siempre cierro mi conlsuta
+            }
+
+        } catch (SQLException e) { //Captura el error el (e)
+            System.out.println("Comuníquese con el Administrador, gracias!!:" + e);
+        } //Captura el error y permite que la consola se siga ejecutando
     }
 
     public String generarCodigoTurno() {

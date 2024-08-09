@@ -68,7 +68,7 @@ public class Main {
         do {
             lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
-            System.out.println("              MENU ESTUDIANTE");
+            System.out.println("              MENÚ ESTUDIANTE");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Crear Solicitud //EN PROCESO CREAR UN DETALLE PREDETERMINADO PARA CADA TIPO DE CERTIFICADO
@@ -104,10 +104,6 @@ public class Main {
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
 
-            System.out.println(""); // Línea en blanco para separación
-            System.out.println("Presione Enter para continuar...");
-            es.nextLine(); // Pausa esperando que el usuario presione Enter
-
         } while (i == 1);
     }
 
@@ -119,12 +115,13 @@ public class Main {
             SolicitudControlador sc = new SolicitudControlador();
             lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
-            System.out.println("              MENU SECRETARIA");
+            System.out.println("              MENÚ SECRETARIA");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
-                               3. Consultar Solicitudes //EN PROCESO FALTA NOMBRE Y APELLIDO DE ESTUDIANTE
+                               3. Consultar Solicitudes 
+                               3. Actualizar Turno //CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
@@ -152,10 +149,11 @@ public class Main {
             AdministradorControlador adm = new AdministradorControlador();
             SecretariaControlador sec = new SecretariaControlador();
             EstudianteControlador ec = new EstudianteControlador();
+            SolicitudControlador sc=new SolicitudControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
-            System.out.println("             MENU ADMINISTRADOR");
+            System.out.println("             MENÚ ADMINISTRADOR");
             System.out.println("""
                                Elija la opción que necesite:
                                1. Registrar secretarias
@@ -164,6 +162,7 @@ public class Main {
                                4. Registrar estudiantes
                                5. Eliminar estudiantes
                                6. Eliminar secretarias
+                               7. Revisar solicitudes //EN PROCESO...
                                0. Salir""");
             int op1 = lg.leerOpcion(es);
             es.nextLine(); // Consumir el salto de línea residual
@@ -181,9 +180,11 @@ public class Main {
                     adm.eliminarEst(es);
                 case 6 ->
                     sec.eliminarSec(es);
+                case 7 ->
+                    sc.revisarSolicitudesMain(es);
                 case 0 -> {
                     i = 0;
-                    System.out.println("Gracias por usar el servicio!");
+                    System.out.println("Saliendo al menú principal...");
                 }
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");

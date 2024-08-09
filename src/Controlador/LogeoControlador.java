@@ -81,7 +81,7 @@ public class LogeoControlador {
                 case "Administrador" ->
                     menuAdministrador(es, logeado);
                 default ->
-                    System.out.println("Usuario no asignado, solicite a Secretaria que le asigne un rol");
+                    System.out.println("Usuario no asignado, solicite al Administrador que le asigne un usuario"); //EN PROCESO EL MENSAJE...
             }
         } else {
             System.out.println("Contraseña o Cédula Incorrecta");
@@ -144,8 +144,22 @@ public class LogeoControlador {
                 System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
             }
         } while (!telefonoValido);
-        System.out.println("Ingrese su correo Electrónico: ");
-        pe.setCorreo(es.nextLine());
+        do {
+            System.out.println("Ingrese su correo Electrónico: ");
+            String correo = es.nextLine();
+            /**
+             * El método indexOf busca la posición del carácter '@' en la
+             * cadena. Si '@' está presente, indexOf devuelve su posición; si
+             * no, devuelve -1.
+             */
+            if (correo.indexOf('@') != -1) {
+                pe.setCorreo(correo);
+                break;
+            } else {
+                System.out.println("Correo inválido. El correo debe contener un '@'. Por favor, intente nuevamente.");
+            }
+        } while (true);
+
         System.out.println("Ingrese su Dirección: ");
         pe.setDireccion(es.nextLine());
 
@@ -287,8 +301,21 @@ public class LogeoControlador {
                 System.out.println("Teléfono inválido. El teléfono debe tener exactamente 10 dígitos. Por favor, intente nuevamente.");
             }
         } while (!telefonoValido);
-        System.out.println("Ingrese su correo Electrónico: ");
-        pe.setCorreo(es.nextLine());
+        do {
+            System.out.println("Ingrese su correo Electrónico: ");
+            String correo = es.nextLine();
+            /**
+             * El método indexOf busca la posición del carácter '@' en la
+             * cadena. Si '@' está presente, indexOf devuelve su posición; si
+             * no, devuelve -1.
+             */
+            if (correo.indexOf('@') != -1) {
+                pe.setCorreo(correo);
+                break;
+            } else {
+                System.out.println("Correo inválido. El correo debe contener un '@'. Por favor, intente nuevamente.");
+            }
+        } while (true);
         System.out.println("Ingrese su Dirección: ");
         pe.setDireccion(es.nextLine());
 

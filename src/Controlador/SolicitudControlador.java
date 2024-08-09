@@ -59,14 +59,12 @@ public class SolicitudControlador {
         lc.limpiarPantalla();
         Solicitud s = new Solicitud();
         SolicitudControlador so = new SolicitudControlador();
+        Funciones f=new Funciones();
         s.setIdPersona(logeado);
         es.nextLine();
         System.out.println("Ingrese los datos para la solicitud");
         es.nextLine();
-        Date todayDate = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String fechaActual = sdf.format(todayDate);
-        s.setFecha(fechaActual);
+        f.fechaSol(s);
         String codigoSolicitud = so.generarCodigoSolicitud();
         s.setCodigoSol(codigoSolicitud);
 
@@ -305,13 +303,9 @@ public class SolicitudControlador {
 
         if (estado.equals("Aprobado") || estado.equals("Aceptado")) {
             Turno t = new Turno();
-            Date todayDate = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaActual = sdf.format(todayDate);
-            t.setFecha(fechaActual);
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-            Date date = new Date();
-            t.setHora(dateFormat.format(date));
+            Funciones f=new Funciones();
+            f.fechaTurno();
+            f.horaTurno();
             t.setRetiro("Ir a retirar");
             t.setIdSolicitud(solicitudSeleccionada.getIdSolicitud());
             TurnoControlador tC = new TurnoControlador();
