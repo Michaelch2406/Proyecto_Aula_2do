@@ -84,5 +84,13 @@ public class Turno{
                 "Hora de retiro: "+ getHora()+ "\n" + 
                 "Retiro: "+ getRetiro(); 
     }
+    public String actualizarTurnoSe(){
+        return "*----------- ACTUALIZACIÓN TURNO -------------*" + "\n" + 
+                "Codigo: " + getCodigo()+ "\n" + 
+                "Fecha de retiro: " + getFecha()+ "\n" + 
+                "Hora de retiro: "+ getHora()+ "\n" + 
+                "Retiro: "+ getRetiro(); 
+    }
+    
     
 }

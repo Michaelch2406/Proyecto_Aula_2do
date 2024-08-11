@@ -35,7 +35,11 @@ public class Main {
 
         do {
             lc.limpiarPantalla();
-            
+            System.out.println("ʕ•́ᴥ•̀ʔっ");
+            System.out.println("(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )");
+            System.out.println("( ◑‿◑)ɔ┏🍟--🍔┑٩(^◡^ )");
+            System.out.println("(╥﹏╥)");
+            System.out.println("(╥︣﹏᷅╥᷅)");
 
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
@@ -73,7 +77,7 @@ public class Main {
                                1. Crear Solicitud
                                2. Consultar Solicitud
                                3. Editar Solicitud
-                               4. Consultar Turno //EN PROCESO FALTA DIA DE RETIRO, Y QUE SE ACTUALICE CUANDO VAYA A RETIRAR COMO RETIRADO
+                               4. Consultar Turno //EN PROCESO FALTA DIA DE RETIRO
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             EstudianteControlador estC = new EstudianteControlador();
@@ -120,7 +124,7 @@ public class Main {
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                3. Consultar Solicitudes 
-                               4. Actualizar Turno //EN PROCESO... CUANDO EL ESTUDIANTE FUE A RETIRAR SU CERTIFICADO PONER RETIRADO 
+                               4. Actualizar Turno //EN PROCESO... MOSTRAR NOMBRES DE SOLICITANTE
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             
@@ -132,8 +136,7 @@ public class Main {
                 case 3 ->
                     sc.consultarSolEst();
                 case 4 ->
-                    tc.consultarTurnoMain(logeado);
-                    //FALTA ACTUALIZAR TURNO A RETIRADO
+                    tc.actualizarTurnosMain(es);
                 case 0 -> {
                     i = 0;
                     System.out.println("Gracias por usar el servicio!");
@@ -163,7 +166,7 @@ public class Main {
                                4. Registrar estudiantes
                                5. Eliminar estudiantes
                                6. Eliminar secretarias
-                               7. Revisar solicitudes //EN PROCESO...
+                               7. Revisar solicitudes
                                0. Salir""");
             int op1 = lg.leerOpcion(es);
 

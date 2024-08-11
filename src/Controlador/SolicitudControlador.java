@@ -180,8 +180,11 @@ public class SolicitudControlador {
 
     public void revisarSolEst() {
         try {
-            // Consulta SQL que une las tablas solicitudes y personas
-            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Razon, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido FROM solicitudes JOIN personas ON solicitudes.Per_Id = personas.Per_Id;";
+            // Consulta SQL que une las tablas solicitudes y personas, filtrando solo las solicitudes pendientes
+            String consultaSQL = "SELECT solicitudes.Sol_Codigo, solicitudes.Sol_Asunto, solicitudes.Sol_Razon, solicitudes.Sol_Fecha, solicitudes.Sol_Estado, personas.Per_Nombre, personas.Per_Apellido "
+                    + "FROM solicitudes "
+                    + "JOIN personas ON solicitudes.Per_Id = personas.Per_Id "
+                    + "WHERE solicitudes.Sol_Estado = 'Pendiente';";
 
             Statement statement = (Statement) connection.createStatement();
             ResultSet resultado = statement.executeQuery(consultaSQL);
