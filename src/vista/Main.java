@@ -35,11 +35,11 @@ public class Main {
 
         do {
             lc.limpiarPantalla();
-            System.out.println("ʕ•́ᴥ•̀ʔっ");
-            System.out.println("(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )");
-            System.out.println("( ◑‿◑)ɔ┏🍟--🍔┑٩(^◡^ )");
-            System.out.println("(╥﹏╥)");
-            System.out.println("(╥︣﹏᷅╥᷅)");
+//            System.out.println("ʕ•́ᴥ•̀ʔっ");
+//            System.out.println("(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )");
+//            System.out.println("( ◑‿◑)ɔ┏🍟--🍔┑٩(^◡^ )");
+//            System.out.println("(╥﹏╥)");
+//            System.out.println("(╥︣﹏᷅╥᷅)");
 
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
@@ -77,7 +77,7 @@ public class Main {
                                1. Crear Solicitud
                                2. Consultar Solicitud
                                3. Editar Solicitud
-                               4. Consultar Turno //EN PROCESO FALTA DIA DE RETIRO
+                               4. Consultar Turno
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
             EstudianteControlador estC = new EstudianteControlador();
@@ -89,14 +89,12 @@ public class Main {
                     sc.crearSolicitud(es, logeado);
                 case 2 ->
                     sc.consultarSolicitudesMain(logeado);
-
                 case 3 -> {
                     sc.consultarSolicitudesMain(logeado);
                     estC.editarSolicitud();
                 }
                 case 4 -> {
                     tc.consultarTurnoMain(logeado);
-                    tc.consultarTurno(logeado);
                 }
                 case 0 -> {
                     i = 0;
@@ -115,7 +113,7 @@ public class Main {
             LogeoControlador lc = new LogeoControlador();
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
-            TurnoControlador tc=new TurnoControlador();
+            TurnoControlador tc = new TurnoControlador();
             lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
             System.out.println("              MENÚ SECRETARIA");
@@ -124,10 +122,10 @@ public class Main {
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                3. Consultar Solicitudes 
-                               4. Actualizar Turno //EN PROCESO... MOSTRAR NOMBRES DE SOLICITANTE
+                               4. Actualizar Turno //EN PROCESO... SOLUCIONAR ERRORES DE FECHAS MOSTRAR NOMBRES DE SOLICITANTE
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
-            
+
             switch (op1) {
                 case 1 ->
                     ec.consultarEstudiantesMain();
@@ -153,7 +151,7 @@ public class Main {
             AdministradorControlador adm = new AdministradorControlador();
             SecretariaControlador sec = new SecretariaControlador();
             EstudianteControlador ec = new EstudianteControlador();
-            SolicitudControlador sc=new SolicitudControlador();
+            SolicitudControlador sc = new SolicitudControlador();
             LogeoControlador lg = new LogeoControlador();
             lg.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");

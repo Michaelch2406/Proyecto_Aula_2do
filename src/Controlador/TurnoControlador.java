@@ -51,10 +51,40 @@ public class TurnoControlador {
         } //Captura el error y permite que la consola se siga ejecutando
     }
 
-    public void consultarTurnoMain(int logeado) {
-        ArrayList<Turno> listaTurnos = consultarTurno(logeado);
-        for (Turno t : listaTurnos) {
-            System.out.println(t.consultarTurnoEst());
+    public void consultarTurnoMain(int idEstudiante) {
+        SolicitudControlador sc = new SolicitudControlador();
+        ArrayList<Solicitud> solicitudes = sc.obtenerSolicitudesPorEstudiante(idEstudiante);
+
+        if (solicitudes.isEmpty()) {
+            System.out.println("No existen solicitudes disponibles.");
+            return;
+        }
+
+        String consultaSQL = "SELECT * FROM turnos WHERE Tur_Retiro='Ir a retirar' AND Sol_Id=?";
+        boolean hayTurnos = false;
+
+        try (PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(consultaSQL)) {
+            for (Solicitud s : solicitudes) {
+                stmt.setInt(1, s.getIdSolicitud());
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        System.out.println("*----------CONSULTA----------*");
+                        System.out.printf("Código: %s%n", rs.getString("Tur_Codigo"));
+                        System.out.printf("Fecha de retiro: %s%n", rs.getString("Tur_Fecha"));
+                        System.out.printf("Hora de aprobación: %s%n", rs.getString("Tur_Hora"));
+                        System.out.printf("Retiro: %s%n", rs.getString("Tur_Retiro"));
+                        System.out.println("*----------------------------*");
+                        hayTurnos = true;
+                    }
+                }
+            }
+
+            if (!hayTurnos) {
+                System.out.println("No existen turnos disponibles.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener los turnos: " + e.getMessage());
         }
     }
 
@@ -62,23 +92,23 @@ public class TurnoControlador {
         ArrayList<Turno> listaTurnos = new ArrayList<>();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-// Usamos StringBuilder para construir la cadena de resultados
 
         try {
-            String consultaSQL = "SELECT * FROM turnos WHERE Tur_Retiro='Ir a retirar' AND Sol_Id=" + idSolicitud + ";";
-            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
+            String consultaSQL = "SELECT * FROM turnos WHERE Tur_Retiro='Ir a retirar' AND Sol_Id=?";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(consultaSQL);
+            preparedStatement.setInt(1, idSolicitud);
 
-            resultado = ejecutar.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            while (resultado.next()) {
+            while (resultSet.next()) {
                 Turno t = new Turno();
-                t.setCodigo(resultado.getString("Tur_Codigo"));
-                t.setFecha(resultado.getString("Tur_Fecha"));
-                t.setHora(resultado.getString("Tur_Hora"));
-                t.setRetiro(resultado.getString("Tur_Retiro"));
+                t.setCodigo(resultSet.getString("Tur_Codigo"));
+                t.setFecha(resultSet.getString("Tur_Fecha"));
+                t.setHora(resultSet.getString("Tur_Hora"));
+                t.setRetiro(resultSet.getString("Tur_Retiro"));
                 listaTurnos.add(t);
             }
-            resultado.close();
+            resultSet.close();
             return listaTurnos;
         } catch (SQLException e) {
             System.out.println("ERROR en la consulta de solicitudes: " + e.getMessage());
@@ -94,58 +124,18 @@ public class TurnoControlador {
                 System.out.println("ERROR al cerrar los recursos: " + ex.getMessage());
             }
         }
-        return null;
-
-    }
-
-    public ArrayList<Turno> consultarPrueba() {
-        ArrayList<Turno> listaTurno = new ArrayList<>();
-        try {
-
-            String consultaSQL = "select * FROM solicitudes join turnos on solicitudes.Sol_Id=turnos.Sol_Id ;";
-            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
-
-            resultado = ejecutar.executeQuery();
-
-            while (resultado.next()) {
-
-                Turno t = new Turno();
-                Solicitud s = new Solicitud();
-                t.setCodigo(resultado.getString("Tur_Codigo"));
-                t.setFecha(resultado.getString("Tur_Fecha"));
-                t.setHora(resultado.getString("Tur_Hora"));
-                t.setRetiro(resultado.getString("Tur_Retiro"));
-                s.setCodigoSol(resultado.getString("Sol_Codigo"));
-                s.setAsunto(resultado.getString("Sol_Asunto"));
-                s.setRazon(resultado.getString("Sol_Razon"));
-
-                listaTurno.add(t);
-            }
-            resultado.close();
-            return listaTurno;
-
-        } catch (SQLException e) {
-            System.out.println("Por favor, comuníquese con el administrador" + e);
-        }
-        return listaTurno;
-    }
-
-    public void actualizarT(Scanner s) {
-        Scanner es = new Scanner(System.in);
-        System.out.println("Ingrese el código del turno que desea actualizar:\n");
-        String codigoTur = es.nextLine();
+        return listaTurnos;
     }
 
     public void actualizarTurnosMain(Scanner es) {
+        // Mostrar información de todos los turnos con el nombre del estudiante
+        mostrarTurnosConEstudiantes();
 
-        // Mostrar la información detallada de todas las solicitudes incluyendo nombre y apellido del estudiante
-        mostrarTur();
-
-        // Solicitar al usuario que seleccione el código de la solicitud que desea actualizar
+        // Solicitar al usuario que seleccione el código del turno que desea actualizar
         System.out.println("Seleccione el código del turno que desea actualizar:");
         String seleccion = es.nextLine();
 
-        // Buscar la solicitud seleccionada
+        // Buscar el turno seleccionado
         Turno turnoseleccionado = null;
         ArrayList<Turno> listaTurno = actualizarTurno();
         for (Turno t : listaTurno) {
@@ -155,18 +145,60 @@ public class TurnoControlador {
             }
         }
 
-        // Verificar si se encontró la solicitud
+        // Verificar si se encontró el turno
         if (turnoseleccionado == null) {
-            System.out.println("Código de solicitud no válido.");
+            System.out.println("Código de turno no válido.");
             return;
         }
-        Fechas f=new Fechas();
-        Turno t=new Turno();
+
+        // Actualizar la fecha y hora del turno y marcarlo como retirado
+        Fechas f = new Fechas();
+        f.fechaTurno(turnoseleccionado);
+        f.horaTurno(turnoseleccionado);
         turnoseleccionado.setRetiro("Retirado");
-        actualizarTurno(turnoseleccionado);        
+
+        // Actualizar el turno en la base de datos
+        actualizarTurno(turnoseleccionado);
     }
-    
-    
+
+    public void mostrarTurnosConEstudiantes() {
+        try {
+            // Consulta SQL que une las tablas turnos, solicitudes, estudiantes y personas
+            String consultaSQL = "SELECT t.Tur_Codigo, t.Tur_Fecha, t.Tur_Hora, t.Tur_Retiro, p.Per_Nombre, p.Per_Apellido "
+                    + "FROM turnos t "
+                    + "JOIN solicitudes s ON t.Sol_Id = s.Sol_Id "
+                    + "JOIN estudiantes e ON s.Per_Id = e.Per_Id "
+                    + "JOIN personas p ON e.Per_Id = p.Per_Id "
+                    + "WHERE t.Tur_Retiro = 'Ir a retirar';";
+
+            PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(consultaSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+
+            // Mostrar la información de los turnos y los estudiantes
+            System.out.println("--------------CONSULTA DE TURNOS--------------");
+            while (resultado.next()) {
+                String codigo = resultado.getString("Tur_Codigo");
+                String fecha = resultado.getString("Tur_Fecha");
+                String hora = resultado.getString("Tur_Hora");
+                String retiro = resultado.getString("Tur_Retiro");
+                String nombreEstudiante = resultado.getString("Per_Nombre");
+                String apellidoEstudiante = resultado.getString("Per_Apellido");
+
+                System.out.println("Código del Turno: " + codigo);
+                System.out.println("Fecha: " + fecha);
+                System.out.println("Hora: " + hora);
+                System.out.println("Retiro: " + retiro);
+                System.out.println("Estudiante: " + nombreEstudiante + " " + apellidoEstudiante);
+                System.out.println("--------------------------------------------");
+            }
+
+            resultado.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar los turnos: " + e.getMessage());
+        }
+    }
 
     public ArrayList<Turno> actualizarTurno() {
         ArrayList<Turno> listaTurnos = new ArrayList<>();
@@ -192,17 +224,6 @@ public class TurnoControlador {
             }
         } catch (SQLException e) {
             System.out.println("ERROR en la consulta de turnos: " + e.getMessage());
-        } finally {
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-                if (preparedStatement != null) {
-                    preparedStatement.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("ERROR al cerrar los recursos: " + ex.getMessage());
-            }
         }
 
         return listaTurnos; // Retorna la lista de solicitudes pendientes
@@ -223,7 +244,6 @@ public class TurnoControlador {
                 String turHora = resultado.getString("Tur_Hora");
                 String turRetiro = resultado.getString("Tur_Retiro");
 
-
                 // Mostrar la información incluyendo nombre y apellido
                 System.out.println("--------------CONSULTA--------------");
                 System.out.println("Código del Turno: " + turCodigo);
@@ -241,25 +261,28 @@ public class TurnoControlador {
     }
 
     public void actualizarTurno(Turno t) {
-        try { //Exception que lanza la consulta
-            //String estático -> dinámicos que son los gets
-            String consultaSQL = "UPDATE turnos SET Tur_Retiro='" + t.getRetiro() + "' WHERE Tur_Codigo='" + t.getCodigo() + "';";
+        try {
+            // Consulta SQL para actualizar fecha, hora y retiro del turno
+            String consultaSQL = "UPDATE turnos SET Tur_Fecha='" + t.getFecha()
+                    + "', Tur_Hora='" + t.getHora()
+                    + "', Tur_Retiro='" + t.getRetiro()
+                    + "' WHERE Tur_Codigo='" + t.getCodigo() + "';";
 
-            //'"+p.getNombres()+"' PARA QUE EL USUARIO INGRESE DATOS
-            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL); //UPCASTING tipo de objeto (PreparedStatement)
-            //DAR CLICK EN EL PLAY ES DECIR EJECUTAR LA CONSULTA
+            // Ejecutar la consulta
+            ejecutar = (PreparedStatement) connection.prepareCall(consultaSQL);
             int res = ejecutar.executeUpdate();
+
             if (res > 0) {
                 System.out.println("El turno ha sido actualizado con éxito");
-                ejecutar.close(); //Siempre cierro mi conlsuta
             } else {
-                System.out.println("Favor ingrese correctamente los datos solicitados: ");
-                ejecutar.close(); //Siempre cierro mi conlsuta
+                System.out.println("Favor ingrese correctamente los datos solicitados.");
             }
 
-        } catch (SQLException e) { //Captura el error el (e)
-            System.out.println("Comuníquese con el Administrador, gracias!!:" + e);
-        } //Captura el error y permite que la consola se siga ejecutando
+            ejecutar.close(); // Cerrar la consulta siempre
+
+        } catch (SQLException e) {
+            System.out.println("Comuníquese con el Administrador, gracias!!: " + e);
+        }
     }
 
     public String generarCodigoTurno() {
