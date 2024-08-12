@@ -175,7 +175,7 @@ public class TurnoControlador {
             ResultSet resultado = preparedStatement.executeQuery();
 
             // Mostrar la información de los turnos y los estudiantes
-            System.out.println("--------------CONSULTA DE TURNOS--------------");
+                System.out.println("*--------------CONSULTA DE TURNOS---------------*");
             while (resultado.next()) {
                 String codigo = resultado.getString("Tur_Codigo");
                 String fecha = resultado.getString("Tur_Fecha");
@@ -189,7 +189,7 @@ public class TurnoControlador {
                 System.out.println("Hora: " + hora);
                 System.out.println("Retiro: " + retiro);
                 System.out.println("Estudiante: " + nombreEstudiante + " " + apellidoEstudiante);
-                System.out.println("--------------------------------------------");
+                System.out.println("*-----------------------------------------------*");
             }
 
             resultado.close();

@@ -77,8 +77,5 @@ public class Turno{
     public void setIdSolicitud(int idSolicitud) {
         this.idSolicitud = idSolicitud;
     }
-
-    
-    
     
 }

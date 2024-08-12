@@ -136,6 +136,7 @@ public class EstudianteControlador {
         Scanner es = new Scanner(System.in);
         System.out.println("Ingrese el código de la solicitud que desea editar:\n");
         String codigoSol = es.nextLine();
+        
         Solicitud s=new Solicitud();
         Fechas f=new Fechas();
         
@@ -271,4 +272,6 @@ public class EstudianteControlador {
             System.out.println("Comuníquese con el Administrador, gracias!!:" + e);
         } //Captura el error y permite que la consola se siga ejecutando
     }
+    
+    
 }

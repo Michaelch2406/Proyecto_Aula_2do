@@ -170,7 +170,6 @@ public class LogeoControlador {
         int idPersona = pc.buscarIdPersona(pe.getCedula());
 
         Estudiante est = new Estudiante();
-        System.out.println("Ingrese el código de estudiante");
 
         String carrera1 = "TECNOLOGÍA SUPERIOR EN DESARROLLO DE SOFTWARE";
         String carrera2 = "TECNOLOGÍA SUPERIOR EN REDES Y TELECOMUNICACIONES";
@@ -261,7 +260,6 @@ public class LogeoControlador {
         EstudianteControlador estC = new EstudianteControlador();
         estC.crearEstudiante(est);
         System.out.println("Registro de estudiante completado exitosamente.");
-        //pause(es);
     }
 
     public void registrarSecretaria(Scanner es) {
@@ -332,7 +330,6 @@ public class LogeoControlador {
         AdministradorControlador admC = new AdministradorControlador();
         admC.crearSecretaria(sec);
         System.out.println("Registro de secretaria completado exitosamente.");
-        pause();
     }
 
     public void limpiarPantalla() {
@@ -345,12 +342,6 @@ public class LogeoControlador {
             }
         } catch (IOException | InterruptedException e) {
         }
-    }
-
-    public static void pause() {
-        System.out.print("Presiona Enter para continuar...");
-        Scanner es = new Scanner(System.in);
-        es.nextLine();
     }
 
     public int leerOpcion(Scanner es) {
@@ -371,10 +362,6 @@ public class LogeoControlador {
 
     public boolean verificarTelefono(String telefono) {
         return telefono.matches("09\\d{8}");
-    }
-
-    private void pause(Scanner es) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

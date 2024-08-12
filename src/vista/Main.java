@@ -34,13 +34,6 @@ public class Main {
         int i = 1;
 
         do {
-            lc.limpiarPantalla();
-//            System.out.println("ʕ•́ᴥ•̀ʔっ");
-//            System.out.println("(っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )");
-//            System.out.println("( ◑‿◑)ɔ┏🍟--🍔┑٩(^◡^ )");
-//            System.out.println("(╥﹏╥)");
-//            System.out.println("(╥︣﹏᷅╥᷅)");
-
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"
                     + "1. Iniciar Sesión\n"
@@ -69,7 +62,6 @@ public class Main {
         LogeoControlador lc = new LogeoControlador();
         int i = 1;
         do {
-            lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
             System.out.println("              MENÚ ESTUDIANTE");
             System.out.println("""
@@ -114,7 +106,6 @@ public class Main {
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
             TurnoControlador tc = new TurnoControlador();
-            lc.limpiarPantalla();
             System.out.println("*--------------BIENVENIDO AL--------------*");
             System.out.println("              MENÚ SECRETARIA");
             System.out.println("""
@@ -122,7 +113,7 @@ public class Main {
                                1. Consultar Estudiantes
                                2. Revisar Solicitudes
                                3. Consultar Solicitudes 
-                               4. Actualizar Turno //EN PROCESO... SOLUCIONAR ERRORES DE FECHAS MOSTRAR NOMBRES DE SOLICITANTE
+                               4. Actualizar Turno 
                                0. Salir""");
             int op1 = lc.leerOpcion(es);
 
@@ -153,7 +144,7 @@ public class Main {
             EstudianteControlador ec = new EstudianteControlador();
             SolicitudControlador sc = new SolicitudControlador();
             LogeoControlador lg = new LogeoControlador();
-            lg.limpiarPantalla();
+            TurnoControlador tc=new TurnoControlador();
             System.out.println("*--------------BIENVENIDO AL--------------*");
             System.out.println("             MENÚ ADMINISTRADOR");
             System.out.println("""
@@ -165,6 +156,7 @@ public class Main {
                                5. Eliminar estudiantes
                                6. Eliminar secretarias
                                7. Revisar solicitudes
+                               8. Actualizar turnos
                                0. Salir""");
             int op1 = lg.leerOpcion(es);
 
@@ -183,6 +175,8 @@ public class Main {
                     sec.eliminarSec(es);
                 case 7 ->
                     sc.revisarSolicitudesMain(es);
+                case 8 ->
+                    tc.actualizarTurnosMain(es);
                 case 0 -> {
                     i = 0;
                     System.out.println("Saliendo al menú principal...");
@@ -190,7 +184,6 @@ public class Main {
                 default ->
                     System.out.println("Opción no válida. Por favor, intente nuevamente.");
             }
-            LogeoControlador.pause();
         } while (i == 1);
     }
 }

@@ -72,7 +72,7 @@ public class Estudiante extends Persona{
     }
         
     public String imprimir(){
-        return "*----------- Datos -------------*" + "\n" + 
+        return "*---------------------- Datos ----------------------*" + "\n" + 
                 "Código: " + getCodigoEst()+ "\n" +
                 "Nombre: " + getNombre()+ "\n" + 
                 "Apellido: "+ getApellido() + "\n" + 
@@ -81,6 +81,7 @@ public class Estudiante extends Persona{
                 "Correo Electrónico: "+ getCorreo() + "\n" + 
                 "Dirección: "+ getDireccion() + "\n" +
                 "Carrera: " + getCarrera() + "\n" +
-                "Nivel: " + getNivel(); 
+                "Nivel: " + getNivel() + "\n" + 
+               "*---------------------------------------------------*" ; 
     }
 }

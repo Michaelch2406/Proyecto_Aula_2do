@@ -91,12 +91,13 @@ public class Solicitud{
     }
 
     public String imprimir(){
-        return "*----------- CONSULTA -------------*" + "\n" + 
+        return "*---------------------------CONSULTA---------------------------*" + "\n" + 
                 "Código: " + getCodigoSol()+ "\n" + 
                 "Fecha: " + getFecha()+ "\n" + 
                 "Asunto: "+ getAsunto()+ "\n" + 
                 "Detalle: "+ getRazon()+ "\n" + 
-                "Estado: "+ getEstado()+ "\n"; 
+                "Estado: "+ getEstado()+ "\n" + 
+               "*--------------------------------------------------------------*"; 
     }
     public String revisarSol(){
         return "*----------- REVISIÓN -------------*" + "\n" + 
@@ -104,13 +105,8 @@ public class Solicitud{
                 "Código: " + getCodigoSol()+ "\n" + 
                 "Asunto: "+ getAsunto()+ "\n" + 
                 "Detalle: "+ getRazon()+ "\n" + 
-                "Estado: "+ getEstado()+ "\n"; 
-    }
-    public String editarsolicitud(){
-        return "*----------- EDITAR -------------*" + "\n" + 
-                "Fecha: " + getFecha()+ "\n" + 
-                "Asunto: "+ getAsunto()+ "\n" + 
-                "Detalle: "+ getRazon(); 
+                "Estado: "+ getEstado()+ "\n"+ 
+               "*---------------------------------*"; 
     }
     
 }

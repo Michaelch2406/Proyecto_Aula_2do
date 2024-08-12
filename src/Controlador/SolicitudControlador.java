@@ -199,14 +199,14 @@ public class SolicitudControlador {
                 String apellido = resultado.getString("Per_Apellido");
 
                 // Mostrar la información incluyendo nombre y apellido
-                System.out.println("--------------REVISIÓN--------------");
+                System.out.println("*---------------------------REVISIÓN---------------------------*");
                 System.out.println("Código de Solicitud: " + solCodigo);
                 System.out.println("Asunto: " + solAsunto);
                 System.out.println("Detalle: " + solRazon);
                 System.out.println("Fecha: " + solFecha);
                 System.out.println("Estado: " + solEstado);
-                System.out.println("Nombre: " + nombre + " " + apellido);
-                System.out.println("------------------------------------");
+                System.out.println("Estudiante: " + nombre + " " + apellido);
+                System.out.println("*--------------------------------------------------------------*");
             }
 
             resultado.close();
@@ -235,14 +235,14 @@ public class SolicitudControlador {
                 String apellido = resultado.getString("Per_Apellido");
 
                 // Mostrar la información incluyendo nombre y apellido
-                System.out.println("--------------CONSULTA--------------");
+                System.out.println("*----------------------------CONSULTA----------------------------*");
                 System.out.println("Código de Solicitud: " + solCodigo);
                 System.out.println("Asunto: " + solAsunto);
                 System.out.println("Detalle: " + solRazon);
                 System.out.println("Fecha: " + solFecha);
                 System.out.println("Fecha: " + solEstado);
                 System.out.println("Estudiante: " + nombre + " " + apellido);
-                System.out.println("------------------------------------");
+                System.out.println("*----------------------------------------------------------------*");
             }
 
             resultado.close();

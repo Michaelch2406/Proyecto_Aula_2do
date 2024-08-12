@@ -64,6 +64,7 @@ public class Secretaria extends Persona{
                 "Nombre: " + getNombre()+ "\n" + 
                 "Apellido: "+ getApellido() + "\n" + 
                 "Cédula: "+ getCedula() + "\n" + 
-                "Carrera: " + getArea();
+                "Carrera: " + getArea()+ "\n" +
+               "*-------------------------------*";
     }
 }
