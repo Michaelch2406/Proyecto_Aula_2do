@@ -55,8 +55,6 @@ public class SolicitudControlador {
     }
 
     public void crearSolicitud(Scanner es, int logeado) {
-        LogeoControlador lc = new LogeoControlador();
-        lc.limpiarPantalla();
         Solicitud s = new Solicitud();
         Fechas f = new Fechas();
         s.setIdPersona(logeado);

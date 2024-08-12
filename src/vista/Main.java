@@ -32,7 +32,9 @@ public class Main {
         LogeoControlador lc = new LogeoControlador();
         Scanner es = new Scanner(System.in);
         int i = 1;
-
+        /**
+         * El switch simplifica la lógica al evitar múltiples if-else y hace que el código sea más fácil de leer.
+         */
         do {
             System.out.println("BIENVENIDO AL SISTEMA");
             System.out.println("Seleccione una opción:\n"

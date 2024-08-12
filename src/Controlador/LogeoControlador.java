@@ -24,7 +24,6 @@ public class LogeoControlador {
 
     public void iniciarSesion(Scanner es) {
         Persona p = new Persona();
-        limpiarPantalla();
         System.out.println("Login Usuario");
 
         // Validar la cédula
@@ -81,7 +80,7 @@ public class LogeoControlador {
                 case "Administrador" ->
                     menuAdministrador(es, logeado);
                 default ->
-                    System.out.println("Usuario no asignado, solicite al Administrador que le asigne un usuario"); //EN PROCESO EL MENSAJE...
+                    System.out.println("Usuario no asignado, solicite al Administrador que le asigne un usuario");
             }
         } else {
             System.out.println("Contraseña o Cédula Incorrecta");
@@ -111,7 +110,6 @@ public class LogeoControlador {
     public void registrarEstudiante(Scanner es) {
         boolean cedulaValida = false;
         boolean telefonoValido = false;
-        limpiarPantalla();
         System.out.println("Ingrese los siguientes datos para registrarse como estudiante...");
         es.nextLine();
         Persona pe = new Persona();
@@ -236,7 +234,6 @@ public class LogeoControlador {
 
         est.setCarrera(carrera);
 
-        // Selección del nivel de carrera
         int nivel;
         do {
             System.out.println("Ingrese su nivel de carrera: ");
@@ -247,10 +244,10 @@ public class LogeoControlador {
             System.out.println("5. Quinto");
 
             nivel = es.nextInt();
-            es.nextLine(); // Consumir el salto de línea residual
+            es.nextLine();
 
             if (nivel < 1 || nivel > 5) {
-                System.out.println("Nivel no válido. Por favor, seleccione un número entre 1 y 5.");
+                System.out.println("Nivel no válido. Por favor, seleccione un número entre 1 al 5.");
             }
         } while (nivel < 1 || nivel > 5);
 
@@ -263,7 +260,6 @@ public class LogeoControlador {
     }
 
     public void registrarSecretaria(Scanner es) {
-        limpiarPantalla();
         boolean cedulaValida = false;
         boolean telefonoValido = false;
         System.out.println("Ingrese los siguientes datos para registrarse como secretaria...");
@@ -304,7 +300,7 @@ public class LogeoControlador {
             /**
              * El método indexOf busca la posición del carácter '@' en la
              * cadena. Si '@' está presente, indexOf devuelve su posición; si
-             * no, devuelve -1.
+             * no, devuelve -1 en este contexto significa que el carácter @ no fue encontrado en la cadena de texto .
              */
             if (correo.indexOf('@') != -1) {
                 pe.setCorreo(correo);
@@ -331,19 +327,12 @@ public class LogeoControlador {
         admC.crearSecretaria(sec);
         System.out.println("Registro de secretaria completado exitosamente.");
     }
-
-    public void limpiarPantalla() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-            }
-        } catch (IOException | InterruptedException e) {
-        }
-    }
-
+    /**
+     * El hasNextInt() asegura que el usuario ingrese un número válido antes de proceder, 
+     * descartando entradas incorrectas y asegurando que el programa continúe sin fallos.
+     * @param es
+     * @return 
+     */
     public int leerOpcion(Scanner es) {
         System.out.print("Seleccione una opción: ");
         while (!es.hasNextInt()) {
@@ -355,11 +344,20 @@ public class LogeoControlador {
         es.nextLine();  // Consumir el salto de línea residual
         return opcion;
     }
-
+    /**
+     * Utiliza una expresión regular (\\d{10}) para asegurarse de que la cédula contiene solo 10 dígitos.
+     * @param cedula
+     * @return 
+     */
     public boolean verificarCedula(String cedula) {
         return cedula.matches("\\d{10}");
     }
-
+    /**
+     * Este código verifica si un número de teléfono comienza con "09" y tiene un total de 10 dígitos. 
+     * Devuelve true si cumple, y false si no.
+     * @param telefono
+     * @return 
+     */
     public boolean verificarTelefono(String telefono) {
         return telefono.matches("09\\d{8}");
     }
